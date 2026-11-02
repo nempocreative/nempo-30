@@ -16,7 +16,7 @@ import { NEMPO_CONSULT_URL } from "@/lib/contact";
 import { toSnake } from "@/lib/api-keys";
 
 
-const API = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
+const API = "/api";
 
 interface Event {
   id: number;

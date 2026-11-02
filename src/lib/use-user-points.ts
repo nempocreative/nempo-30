@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "@/contexts/auth-context";
 
-const API = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
+const API = "/api";
 
 export interface UserPoints {
   total_points: number;

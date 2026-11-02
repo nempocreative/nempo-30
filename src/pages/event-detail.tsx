@@ -16,7 +16,7 @@ import {
   Swords, HeartPulse, SearchX, Dumbbell, Flame, Moon,
 } from "lucide-react";
 
-const API = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
+const API = "/api";
 
 const catMeta: Record<string, { from: string; to: string; light: string; chip: string }> = {
   Budaya:      { from: "#7c3aed", to: "#a78bfa", light: "#f5f3ff", chip: "#ede9fe" },

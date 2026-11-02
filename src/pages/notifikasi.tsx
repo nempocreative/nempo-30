@@ -4,7 +4,7 @@ import { SEO } from "@/components/seo";
 import { Link } from "@/lib/wouter";
 import { ArrowLeft, Bell, BellOff, Megaphone, Tag, Info, Loader2, RefreshCw, AlertTriangle } from "lucide-react";
 
-const API = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
+const API = "/api";
 
 interface Notif {
   id: number;

@@ -87,7 +87,7 @@ function formatJoinDate(dateStr: string | null) {
   return new Date(dateStr).toLocaleDateString("id-ID", { month: "long", year: "numeric" });
 }
 
-const API = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
+const API = "/api";
 
 export default function ProfilePage() {
   const { user, mitra, logout, loading } = useAuth();

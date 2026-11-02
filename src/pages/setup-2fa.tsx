@@ -7,7 +7,7 @@ import {
   Loader2, AlertCircle, Copy, Eye, EyeOff, Smartphone,
 } from "lucide-react";
 
-const API = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
+const API = "/api";
 
 type Step = "intro" | "scan" | "verify" | "done";
 

@@ -11,7 +11,7 @@ import {
   AlertTriangle, Key, RefreshCw, Download, Languages,
 } from "lucide-react";
 
-const API = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
+const API = "/api";
 
 function maskPhone(phone: string | null | undefined): string {
   if (!phone) return "Belum diisi";
