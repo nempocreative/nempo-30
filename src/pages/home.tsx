@@ -2186,6 +2186,15 @@ export default function Home() {
                   <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-black uppercase tracking-wider text-primary">Gratis</span>
                 </div>
                 <h3 className="text-2xl font-black leading-tight text-foreground sm:text-3xl lg:text-4xl">MusiComedy Night</h3>
+                <div className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/15 bg-primary/5 py-1 pl-1.5 pr-3.5">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                    <Mic className="h-3.5 w-3.5" strokeWidth={2} />
+                  </span>
+                  <p className="text-[13px] font-bold leading-tight text-foreground sm:text-sm">
+                    bersama <span className="font-black">Saduli Ragap</span>
+                  </p>
+                </div>
+
                 <p className="max-w-lg text-sm leading-relaxed text-muted-foreground sm:text-base">
                   Malam musik dan komedi bareng NEMPO.ID × Kala Muda di Good Story Cafe.
                 </p>
@@ -2210,6 +2219,14 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
+                  <Mic className="mt-0.5 h-5 w-5 shrink-0 text-primary" strokeWidth={1.75} />
+                  <div className="min-w-0">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">Bintang Tamu</p>
+                    <p className="text-sm font-bold leading-snug text-foreground">bersama Saduli Ragap</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+
                   <Ticket className="mt-0.5 h-5 w-5 shrink-0 text-primary" strokeWidth={1.75} />
                   <div className="min-w-0">
                     <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">Harga</p>

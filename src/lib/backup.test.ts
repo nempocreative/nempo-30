@@ -5,9 +5,10 @@ const empty = () =>
   Object.fromEntries(BACKUP_TABLES.map((t) => [t, { rows: [], expected: 0 }])) as unknown as Record<BackupTable, BackupTableResult>;
 
 describe("backup", () => {
-  it("covers all 18 database tables", () => {
-    expect(BACKUP_TABLES).toHaveLength(18);
-    expect(new Set(BACKUP_TABLES).size).toBe(18);
+  it("covers all 19 database tables", () => {
+    expect(BACKUP_TABLES).toHaveLength(19);
+    expect(new Set(BACKUP_TABLES).size).toBe(19);
+
   });
 
   it("reads past the 1000-row page limit", async () => {
@@ -23,7 +24,7 @@ describe("backup", () => {
     const file = buildBackupFile(ok);
     expect(file.summary.complete).toBe(true);
     expect(file.summary.totalRows).toBe(2);
-    expect(Object.keys(file.data)).toHaveLength(18);
+    expect(Object.keys(file.data)).toHaveLength(19);
 
     const partial = empty();
     partial.kuliner = { rows: [{ id: 1 }], expected: 3 };

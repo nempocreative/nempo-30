@@ -4,6 +4,8 @@ import { useRoute, Link, useLocation, useSearch } from "@/lib/wouter";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/auth-context";
 import { NEMPO_CONSULT_URL } from "@/lib/contact";
+import { toSnake } from "@/lib/api-keys";
+
 import {
   ChevronRight, ChevronLeft, Check, Ticket, MapPin, Calendar,
   User, Users, Mail, Phone, Building2, CheckCircle2, Instagram,
@@ -140,9 +142,12 @@ export default function EventCheckout() {
     Promise.all([
       fetch(`/api/events/${params.slug}`).then(r => r.ok ? r.json() : null),
       fetch(`/api/events/${params.slug}/tickets`).then(r => r.ok ? r.json() : []),
-    ]).then(([ev, tix]: [ApiEvent | null, EventTicket[]]) => {
+    ]).then(([rawEv, rawTix]: [ApiEvent | null, EventTicket[]]) => {
+      const ev = toSnake<ApiEvent | null>(rawEv);
+      const tix = toSnake<EventTicket[]>(rawTix);
       setEvent(ev);
       setTickets(tix);
+
 
       /* Cek ketersediaan berdasarkan tanggal penjualan */
       const now = new Date();

@@ -1,6 +1,8 @@
 import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
 import { useState, useEffect, useRef } from "react";
+import { toSnake } from "@/lib/api-keys";
+
 import { useRoute, Link } from "@/lib/wouter";
 import { getTypeLabel, getAgeLabel, TYPE_COLORS, getMatchJam, streetFightDay1, streetFightDay1Peserta, RUNDOWN_DAY1, RUNDOWN_DAY2 } from "@/data/temu-tarung";
 import { useMatchContext } from "@/contexts/match-context";
@@ -1559,8 +1561,9 @@ export default function EventDetail() {
       fetch(`${API}/events/${params.slug}`).then(r => r.ok ? r.json() : null),
       fetch(`${API}/events/${params.slug}/tickets`).then(r => r.ok ? r.json() : []),
     ]).then(([ev, tix]) => {
-      setEvent(ev);
-      const active = (tix as EventTicket[]).filter(t => t.active);
+      setEvent(toSnake<ApiEvent>(ev));
+      const active = toSnake<EventTicket[]>(tix).filter(t => t.active);
+
       setTickets(active);
       const first = active.find(t => {
         const now   = new Date();
