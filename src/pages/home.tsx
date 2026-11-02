@@ -2169,31 +2169,34 @@ export default function Home() {
           </div>
           <Link
             href="/event/musicomedy-night"
-            className="group mx-auto block w-full max-w-xl overflow-hidden rounded-3xl border border-border bg-card shadow-sm"
+            className="group block w-full overflow-hidden rounded-3xl border border-border bg-card shadow-sm"
           >
-            <div className="flex flex-col sm:flex-row">
-              <div className="relative w-full overflow-hidden sm:w-[190px] sm:shrink-0">
+            <div className="flex flex-col sm:h-[360px] sm:flex-row">
+              <div className="relative aspect-[3/4] w-full shrink-0 overflow-hidden sm:h-full sm:w-auto">
                 <img
                   src={musicomedyPoster.url}
                   alt="Poster MusiComedy Night"
-                  className="aspect-[3/4] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   loading="lazy"
                 />
               </div>
-              <div className="flex flex-1 flex-col justify-center gap-1 p-4 sm:p-5">
+              <div className="flex flex-1 flex-col justify-center gap-2 p-5 sm:gap-3 sm:p-8 lg:p-10">
                 <div className="flex flex-wrap items-center gap-2">
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-primary">Rabu, 4 November 2026</p>
-                  <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-primary">Gratis</span>
+                  <p className="text-xs font-bold uppercase tracking-wider text-primary">Rabu, 4 November 2026</p>
+                  <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-black uppercase tracking-wider text-primary">Gratis</span>
                 </div>
-                <h3 className="mt-0.5 text-lg font-black leading-tight text-foreground">MusiComedy Night</h3>
-                <p className="mt-0.5 text-[13px] leading-snug text-muted-foreground">NEMPO.ID × Kala Muda · Good Story Cafe, Jl. Sudirman Copong No. 11, Garut</p>
-                <span className="mt-2 inline-flex w-fit items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-[13px] font-bold text-primary">
+                <h3 className="text-2xl font-black leading-tight text-foreground sm:text-3xl">MusiComedy Night</h3>
+                <p className="max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+                  NEMPO.ID × Kala Muda · Good Story Cafe, Jl. Sudirman Copong No. 11, Garut
+                </p>
+                <span className="mt-1 inline-flex w-fit items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-bold text-primary-foreground">
                   Lihat detail event
-                  <ChevronRight className="h-3.5 w-3.5" />
+                  <ChevronRight className="h-4 w-4" />
                 </span>
               </div>
             </div>
           </Link>
+
 
         </section>
 
