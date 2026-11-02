@@ -165,7 +165,7 @@ export default function PortofolioPage() {
               {invitationThemes.map((theme) => (
                 <Link
                   key={theme.code}
-                  href={`/invitation-demo/${theme.slug}`}
+                  href={`/wedding-invitation/tema/${theme.slug}`}
                   className="group block overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
                 >
                   <InvitationCoverPreview theme={theme} />

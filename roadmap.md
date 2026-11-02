@@ -86,3 +86,5 @@
 - [x] Tim beranda: 7 foto baru dipasang (wajah tetap, jas navy + kaus putih, tangan dilipat, latar biru muda; 7 perbandingan wajah asli-vs-hasil diperiksa); baris tim bisa digeser sentuh, jalan otomatis, dan ada tanda "GESER" di komputer — diperiksa di HP dan komputer tanpa error.
 - [x] Tim beranda: foto yang tidak diminta dihapus (Maya/Faris/Laras/Evan + 10 ilustrasi "creator"); baris kini hanya 12 potret asli, semua termuat penuh, build OK.
 - [x] Tim beranda: foto ke-13 (kiriman 20.47.07) dipasang — wajah dicocokkan dengan aslinya, jas navy + kaus putih, tangan sedekap, latar biru muda; baris tim kini 13 potret asli, semua termuat, build OK.
+- [x] Recruitment: tanpa ikon/logo bintang; pilihan minat jadi Designer, Web Developer, Content Creator, Videografer dan Fotographer, Marketing, Event Management; kirim formulir langsung ke WhatsApp.
+- [x] Notifikasi: 12 isi diambil dari konten situs sendiri (acara portofolio, recruitment, harga paket, kanal kontak); panel lonceng dan halaman /notifikasi bisa diklik ke halaman aslinya; 7 tes lulus.

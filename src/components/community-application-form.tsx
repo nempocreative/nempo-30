@@ -1,14 +1,9 @@
 import { useState } from "react";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
-import { CheckCircle2, Loader2, Send } from "lucide-react";
-
-const interestOptions = [
-  "Event dan panggung",
-  "Konten dan sosmed",
-  "Desain kreatif",
-  "Talenta muda",
-];
+import { CheckCircle2, Loader2, MessageCircle, Send } from "lucide-react";
+import { NEMPO_WA_NUMBER } from "@/lib/contact";
+import { applicationWaUrl, interestOptions } from "@/data/community-recruitment";
 
 const applicationSchema = z.object({
   full_name: z
@@ -51,13 +46,17 @@ const labelClass =
 /**
  * Formulir open recruitment Nempo Community. Satu sumber untuk halaman
  * Komunitas dan halaman Recruitment supaya pengisiannya selalu sama.
+ *
+ * Alur: isian divalidasi, lalu WhatsApp resmi Nempo dibuka dengan pesan
+ * terisi otomatis, dan salinan isian disimpan ke arsip komunitas.
  */
 export function CommunityApplicationForm() {
   const [form, setForm] = useState<ApplicationForm>(emptyForm);
   const [errors, setErrors] = useState<Partial<Record<keyof ApplicationForm, string>>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [submitError, setSubmitError] = useState("");
+  const [waUrl, setWaUrl] = useState("");
+  const [archived, setArchived] = useState(true);
 
   const updateField = (field: keyof ApplicationForm, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -66,7 +65,6 @@ export function CommunityApplicationForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitError("");
 
     const parsed = applicationSchema.safeParse(form);
     if (!parsed.success) {
@@ -79,6 +77,11 @@ export function CommunityApplicationForm() {
       return;
     }
 
+    const url = applicationWaUrl(parsed.data);
+    setWaUrl(url);
+    // Dibuka di sini, masih dalam gestur klik, supaya tidak diblokir peramban.
+    window.open(url, "_blank", "noopener,noreferrer");
+
     setSubmitting(true);
     const { error } = await supabase.from("community_applications").insert({
       full_name: parsed.data.full_name,
@@ -88,11 +91,7 @@ export function CommunityApplicationForm() {
       reason: parsed.data.reason || null,
     });
     setSubmitting(false);
-
-    if (error) {
-      setSubmitError("Pendaftaran belum terkirim. Coba lagi sebentar lagi, ya.");
-      return;
-    }
+    setArchived(!error);
     setSubmitted(true);
   };
 
@@ -107,17 +106,34 @@ export function CommunityApplicationForm() {
             Pendaftaranmu sudah masuk!
           </h3>
           <p className="mt-2 max-w-sm text-sm leading-6 text-[#62677c]">
-            Terima kasih, {form.full_name.split(" ")[0]}. Kami akan
-            segera menyapamu lewat WhatsApp. Sampai jumpa di kegiatan
-            berikutnya!
+            Terima kasih, {form.full_name.split(" ")[0]}. Isian formulirmu sudah
+            dibuka di WhatsApp Nempo — tinggal tekan kirim di sana supaya tim
+            kami langsung membacanya.
           </p>
+          <a
+            href={waUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#a62f78] px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#7b2866]/25 transition hover:-translate-y-0.5 hover:bg-[#862761]"
+          >
+            <MessageCircle className="h-4 w-4" />
+            Buka WhatsApp lagi
+          </a>
+          {!archived && (
+            <p className="mt-3 max-w-sm text-[11px] leading-5 text-[#c2274f]">
+              Salinan isianmu belum tersimpan di arsip kami, tapi pesan
+              WhatsApp-nya sudah terbuka. Kirimkan saja lewat WhatsApp.
+            </p>
+          )}
           <button
             type="button"
             onClick={() => {
               setForm(emptyForm);
               setSubmitted(false);
+              setWaUrl("");
+              setArchived(true);
             }}
-            className="mt-6 text-sm font-bold text-[#a62f78] underline-offset-4 hover:underline"
+            className="mt-5 text-sm font-bold text-[#a62f78] underline-offset-4 hover:underline"
           >
             Daftarkan orang lain
           </button>
@@ -233,12 +249,6 @@ export function CommunityApplicationForm() {
             </div>
           </div>
 
-          {submitError && (
-            <p className="mt-4 rounded-2xl bg-[#c2274f]/10 px-4 py-3 text-xs font-semibold text-[#c2274f]">
-              {submitError}
-            </p>
-          )}
-
           <button
             type="submit"
             disabled={submitting}
@@ -251,14 +261,15 @@ export function CommunityApplicationForm() {
               </>
             ) : (
               <>
-                Kirim pendaftaran
+                Kirim pendaftaran ke WhatsApp
                 <Send className="h-4 w-4" />
               </>
             )}
           </button>
           <p className="mt-3 text-center text-[11px] leading-5 text-[#a8a6c2]">
-            Data kamu hanya dipakai untuk menghubungimu soal kegiatan
-            komunitas.
+            Isianmu dibuka di WhatsApp resmi Nempo {NEMPO_WA_NUMBER} — tinggal
+            tekan kirim. Data ini hanya dipakai untuk menghubungimu soal
+            kegiatan komunitas.
           </p>
         </form>
       )}

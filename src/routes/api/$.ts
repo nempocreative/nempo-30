@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { createClient } from "@supabase/supabase-js";
+import { buildNotifications } from "@/data/notifications";
 
 // Public read-only bridge: old site endpoints (/api/wisata, ...) served from the database.
 const TABLES: Record<string, { table: string; order?: string; filter?: (q: any) => any }> = {
@@ -59,7 +60,8 @@ export const Route = createFileRoute("/api/$")({
         const parts = (params._splat ?? "").split("/").filter(Boolean);
         const [name, idOrSlug] = parts;
         const cfg = name ? TABLES[name] : undefined;
-        if (name !== "stats" && !cfg) return json({ error: "Not found" }, 404);
+        if (name !== "stats" && name !== "notifications" && !cfg) return json({ error: "Not found" }, 404);
+        if (name === "notifications") return json(buildNotifications());
 
         const sb = client();
         if (!sb) {
