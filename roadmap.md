@@ -97,4 +97,4 @@
 
 
 
-- [ ] Event detail banner: full width on desktop, uncropped
+- [x] Event detail banner: full width on desktop, uncropped
