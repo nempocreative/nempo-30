@@ -83,7 +83,7 @@ export const eventPortfolioItems: EventPortfolioItem[] = [
     name: "Riuh Rona",
     image: riuhRonaPosterImage,
     location: "Maru",
-    date: "5 September 2026",
+    date: "4 November 2026",
     badge: "Event",
   },
   {
