@@ -4,7 +4,8 @@
  * Satu sumber browser-safe: semua teks diambil dari halaman yang benar-benar
  * ada di situs ini — harga dari modul data layanan, judul acara dari
  * portofolio event, dan kanal kontak dari src/lib/contact.ts.
- * Tidak ada tabel notifikasi di basis data, jadi isinya indeed statistik.
+ * Tidak ada tabel notifikasi di basis data, jadi isinya diambil dari konten
+ * situs ini sendiri.
  */
 
 export type NotificationType = "info" | "update" | "promo" | "event" | "warning";
