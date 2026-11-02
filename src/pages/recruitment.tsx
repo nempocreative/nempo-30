@@ -1,7 +1,7 @@
 import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
 import { CommunityApplicationForm } from "@/components/community-application-form";
-import { CheckCircle2, Users, Sparkles, Handshake, GraduationCap, CalendarHeart } from "lucide-react";
+import { CheckCircle2, Users, FolderOpen, Handshake, GraduationCap, CalendarHeart } from "lucide-react";
 
 export default function RecruitmentPage() {
   return (
@@ -67,7 +67,7 @@ export default function RecruitmentPage() {
                 { icon: CalendarHeart, t: "Terlibat di event", d: "Ikut jadi bagian tim di acara-acara Nempo." },
                 { icon: GraduationCap, t: "Belajar langsung", d: "Asah skill kreatif, konten, dan organisasi bareng tim." },
                 { icon: Handshake, t: "Relasi baru", d: "Kenalan dengan anak muda dan kreator se-Jawa Barat." },
-                { icon: Sparkles, t: "Portofolio nyata", d: "Pengalaman yang bisa kamu tunjukkan ke mana saja." },
+                { icon: FolderOpen, t: "Portofolio nyata", d: "Pengalaman yang bisa kamu tunjukkan ke mana saja." },
               ].map(({ icon: Icon, t, d }) => (
                 <div key={t} className="rounded-3xl border border-[#e5d3e6] bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
                   <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#a62f78]/10 text-[#a62f78]"><Icon className="h-5 w-5" /></span>
