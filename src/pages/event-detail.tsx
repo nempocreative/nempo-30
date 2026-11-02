@@ -1559,8 +1559,9 @@ export default function EventDetail() {
       fetch(`${API}/events/${params.slug}`).then(r => r.ok ? r.json() : null),
       fetch(`${API}/events/${params.slug}/tickets`).then(r => r.ok ? r.json() : []),
     ]).then(([ev, tix]) => {
-      setEvent(ev);
-      const active = (tix as EventTicket[]).filter(t => t.active);
+      setEvent(toSnake<ApiEvent>(ev));
+      const active = toSnake<EventTicket[]>(tix).filter(t => t.active);
+
       setTickets(active);
       const first = active.find(t => {
         const now   = new Date();
