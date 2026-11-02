@@ -44,7 +44,37 @@ export default function PortofolioPage() {
               Dari panggung event, konten sosmed, sampai undangan digital —
               lihat hasil kerja kami sebelum mulai bareng Nempo.
             </p>
+            <div className="mt-8 grid max-w-xl grid-cols-3 gap-3">
+              {[
+                { n: eventPortfolioItems.length, l: "Event" },
+                { n: invitationThemes.length, l: "Tema undangan" },
+                { n: serviceLinks.length, l: "Layanan" },
+              ].map((s) => (
+                <div key={s.l} className="rounded-2xl border border-white/20 bg-white/10 px-4 py-3 backdrop-blur">
+                  <p className="text-2xl font-black sm:text-3xl">{s.n}+</p>
+                  <p className="text-[11px] font-bold uppercase tracking-wide text-white/70">{s.l}</p>
+                </div>
+              ))}
+            </div>
           </div>
+        </section>
+
+        {/* ===== JUMP NAV ===== */}
+        <nav className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
+          <div className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-4 py-3 sm:px-6 lg:px-8">
+            {[
+              { id: "event", l: "Event" },
+              { id: "sosmed", l: "Sosmed" },
+              { id: "undangan", l: "Undangan Digital" },
+            ].map((t) => (
+              <a key={t.id} href={`#${t.id}`} className="shrink-0 rounded-full border border-slate-200 bg-slate-50 px-4 py-1.5 text-xs font-bold text-slate-600 transition hover:border-[#0194f3] hover:text-[#0194f3]">
+                {t.l}
+              </a>
+            ))}
+          </div>
+        </nav>
+        <section className="hidden">
+          <div>
         </section>
 
         {/* ===== EVENT ===== */}
