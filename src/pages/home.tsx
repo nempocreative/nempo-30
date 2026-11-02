@@ -2248,6 +2248,28 @@ export default function Home() {
           );
         })()}
 
+        {/* ── Event Mendatang spotlight ── */}
+        <section className="relative">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 bg-primary text-primary-foreground">
+              <CalendarDays className="w-5 h-5" strokeWidth={1.75} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h2 className="text-foreground font-black text-base leading-tight">Event Mendatang</h2>
+              <p className="text-muted-foreground text-[10px] font-bold uppercase tracking-[0.10em] mt-0.5">Catat tanggalnya, ayo datang bareng!</p>
+            </div>
+          </div>
+          <Link href="/event/musicomedy-night" className="block rounded-3xl overflow-hidden border border-border bg-card shadow-sm">
+            <img src={musicomedyPoster.url} alt="Poster MusiComedy Night" className="w-full aspect-[4/5] object-cover" loading="lazy" />
+            <div className="p-4">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-primary">Rabu, 4 November 2026</p>
+              <h3 className="text-lg font-black text-foreground leading-tight mt-1">MusiComedy Night</h3>
+              <p className="text-sm text-muted-foreground mt-1">NEMPO.ID × Kala Muda · Good Story Cafe, Jl. Sudirman Copong No. 11, Garut</p>
+              <span className="inline-block mt-3 text-sm font-bold text-primary">Lihat detail event →</span>
+            </div>
+          </Link>
+        </section>
+
         {/* ── Upcoming Event ── */}
         {activeEventItems.length > 0 && (() => {
           const cafeEvents = activeEventItems;
