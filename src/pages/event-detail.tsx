@@ -48,6 +48,19 @@ interface EventTicket {
   sort_order: number; active: boolean;
 }
 
+// The API camelizes column names (guest_stars -> guestStars), but this page's
+// types are snake_case, so normalize the response back before reading it.
+function toSnake<T>(value: unknown): T {
+  if (Array.isArray(value)) return value.map(toSnake) as T;
+  if (!value || typeof value !== "object") return value as T;
+  return Object.fromEntries(
+    Object.entries(value as Record<string, unknown>).map(([key, val]) => [
+      key.replace(/([a-z0-9])([A-Z])/g, "$1_$2").toLowerCase(),
+      toSnake(val),
+    ]),
+  ) as T;
+}
+
 function fmtDateShort(iso: string) {
   return new Date(iso).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" });
 }
