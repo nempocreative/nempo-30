@@ -8,7 +8,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Bikin bareng Nempo: wedding & event organizer, undangan digital, kelola sosmed, website, desain, talent, dan sistem usaha. Jelajahi wisata, kuliner, dan penginapan Garut & Jawa Barat.",
+          "Bikin bareng Nempo: wedding & event organizer, undangan digital, kelola sosmed, website, desain, talent, dan sistem usaha. Ayo bikin acara bareng kita!",
       },
       { property: "og:title", content: "Nempo Garut — Event Organizer, Wedding & Layanan Kreatif" },
       {

@@ -10,13 +10,13 @@ export const Route = createFileRoute("/$")({
       {
         name: "description",
         content:
-          "Halaman Nempo Garut: layanan acara, wedding, undangan digital, sosmed, website, desain, talent, dan sistem usaha, serta wisata, kuliner, dan penginapan di Garut dan Jawa Barat.",
+          "Halaman Nempo Garut: layanan acara, wedding, undangan digital, sosmed, website, desain, talent, dan sistem usaha di Garut.",
       },
       { property: "og:title", content: "Nempo Garut — Organizer & Platform Kreatif Jawa Barat" },
       {
         property: "og:description",
         content:
-          "Acara, wedding, layanan kreatif, dan panduan wisata Garut & Jawa Barat dalam satu platform Nempo.",
+          "Event, wedding, dan layanan kreatif bareng Nempo Garut.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
