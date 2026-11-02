@@ -8,6 +8,7 @@ import { useAuth } from "@/contexts/auth-context";
 import { ALL_CITIES, CITY_OPTIONS, useCityFilter, type CityName } from "@/contexts/city-filter-context";
 import { NEMPO_CONSULT_URL } from "@/lib/contact";
 import { mainNavItems } from "@/data/main-nav-items";
+import { bottomNavItems } from "@/data/bottom-nav-items";
 import { GREET_MSG, botReply, type ChatMsg } from "@/data/buddy-chat";
 import {
   NavAdventureIcon,
@@ -24,14 +25,11 @@ import {
   NavKulinerIcon,
   NavKomunitasIcon,
   NavMerchandiseIcon,
-  NavProfileIcon,
-  NavOrdersIcon,
   NavSponsorshipIcon,
   NavTalentIcon,
   NavTicketIcon,
   NavTravelIcon,
   NavWisataIcon,
-  NavWishlistIcon,
 } from "@/components/navigation-glyphs";
 
 import { BookOpenText } from "lucide-react";
@@ -58,15 +56,6 @@ function getAppFrameMode() {
   }
 }
 
-function getBottomNavItems(isMitra: boolean) {
-  return [
-    { href: "/", icon: NavHomeIcon, label: "Beranda" },
-    { href: "/wishlist", icon: NavWishlistIcon, label: "Wishlist" },
-    { href: "/event", icon: NavEventIcon, label: "Event" },
-    { href: "/pesanan-saya", icon: NavOrdersIcon, label: "Pesanan" },
-    { href: isMitra ? "/mitra-dashboard" : "/profile", icon: NavProfileIcon, label: "Profile" },
-  ];
-}
 
 function CityPicker({ mobile = false, compact = false }: { mobile?: boolean; compact?: boolean }) {
   const { selectedCity, setSelectedCity, isCityAvailable } = useCityFilter();
@@ -842,49 +831,6 @@ export function Layout({ children, hideBottomNav, minimalChrome }: { children: R
               </div>
             </div>
           </div>
-          {/* ── Metode Pembayaran ── */}
-
-          {(() => {
-            const base = import.meta.env.BASE_URL + "payment-logos/";
-            const v = "?v=7";
-            const payments = [
-              { label: "BSI",          src: base + "bsi.png"      + v },
-              { label: "Danamon",      src: base + "danamon.webp"  + v },
-              { label: "CIMB Niaga",   src: base + "cimb.png"     + v },
-              { label: "QRIS",         src: base + "qris.png"     + v },
-              { label: "BNI",          src: base + "bni.png"      + v },
-              { label: "BRI",          src: base + "bri.png"      + v },
-              { label: "GoPay",        src: base + "gopay.webp"   + v },
-              { label: "Bank Mandiri", src: base + "mandiri.webp" + v },
-              { label: "PermataBank",  src: base + "permata.webp" + v },
-            ];
-            return (
-              <div className="border-t border-white/20 pt-5 mb-6">
-                <p className="text-white/50 text-[10px] uppercase tracking-widest font-bold mb-4 text-center">Metode Pembayaran</p>
-                {/* Mobile: auto-scroll marquee */}
-                <div className="sm:hidden" style={{ position: "relative", width: "100%", overflow: "hidden" }}>
-                  <div className="payment-marquee" style={{ display: "flex", flexWrap: "nowrap", gap: 10, width: "max-content" }}>
-                    {[...payments, ...payments].map((p, i) => (
-                      <div key={i} style={{ width: 82, height: 44, flexShrink: 0, background: "white", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
-                        <img src={p.src} alt={p.label} style={{ width: "100%", height: "100%", objectFit: "contain", padding: 6 }} />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Desktop: 1 row flex */}
-                <div className="hidden sm:flex flex-nowrap gap-1.5">
-                  {payments.map((p) => (
-                    <div key={p.label}
-                      className="flex-1 bg-white rounded-lg shadow-sm flex items-center justify-center"
-                      style={{ minWidth: 0, height: 44 }}>
-                      <img src={p.src} alt={p.label} className="w-full h-full object-contain p-1.5" />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            );
-          })()}
           <div
             className="border-t border-white/20 pt-5 text-center"
           >
@@ -895,7 +841,6 @@ export function Layout({ children, hideBottomNav, minimalChrome }: { children: R
 
       {/* ── Mobile Bottom Navigation ── */}
       {!minimalChrome && !hideBottomNav && (() => {
-        const bottomNavItems = getBottomNavItems(!!mitra);
         const navActiveColor = "#0194f3";
         return (
           <nav
