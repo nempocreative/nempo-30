@@ -1648,13 +1648,10 @@ export default function EventDetail() {
       <div className="bg-gray-50 min-h-screen">
 
         {/* ── HERO ── */}
-        <div className="relative w-full overflow-hidden bg-gray-900" style={{ height: "58vw", maxHeight: 440, minHeight: 220 }}>
+        <div className="relative w-full overflow-hidden bg-gray-900" style={event.image ? undefined : { height: "58vw", maxHeight: 360, minHeight: 220 }}>
           {event.image
-            ? <>
-                {/* Blurred fill so the whole banner can show uncropped on wide screens */}
-                <img src={event.image} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-70" />
-                <img src={event.image} alt={event.name} className="relative w-full h-full object-contain" />
-              </>
+            ? /* Full width, natural height: the whole banner shows, never cropped */
+              <img src={event.image} alt={event.name} className="block w-full h-auto" />
             : <div className="w-full h-full" style={{ background: `linear-gradient(135deg, ${g.from}, ${g.to})` }} />
           }
           <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, transparent 45%, rgba(0,0,0,0.65) 100%)" }} />
