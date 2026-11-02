@@ -2269,7 +2269,7 @@ export default function Home() {
                 <img
                   src={musicomedyPoster.url}
                   alt="Poster MusiComedy Night"
-                  className="aspect-[3/4] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="h-[300px] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03] sm:h-auto sm:aspect-[3/4] sm:object-cover"
                   loading="lazy"
                 />
               </div>
