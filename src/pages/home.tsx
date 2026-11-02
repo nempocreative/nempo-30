@@ -2185,17 +2185,41 @@ export default function Home() {
                   <p className="text-xs font-bold uppercase tracking-wider text-primary">Rabu, 4 November 2026</p>
                   <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-black uppercase tracking-wider text-primary">Gratis</span>
                 </div>
-                <h3 className="text-2xl font-black leading-tight text-foreground sm:text-3xl">MusiComedy Night</h3>
-                <p className="max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-                  NEMPO.ID × Kala Muda · Good Story Cafe, Jl. Sudirman Copong No. 11, Garut
+                <h3 className="text-2xl font-black leading-tight text-foreground sm:text-3xl lg:text-4xl">MusiComedy Night</h3>
+                <p className="max-w-lg text-sm leading-relaxed text-muted-foreground sm:text-base">
+                  Malam musik dan komedi bareng NEMPO.ID × Kala Muda di Good Story Cafe.
                 </p>
                 <span className="mt-1 inline-flex w-fit items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-bold text-primary-foreground">
                   Lihat detail event
                   <ChevronRight className="h-4 w-4" />
                 </span>
               </div>
+              <aside className="hidden w-[290px] shrink-0 flex-col justify-center gap-5 border-l border-border bg-muted/30 p-8 lg:flex">
+                <div className="flex items-start gap-3">
+                  <CalendarDays className="mt-0.5 h-5 w-5 shrink-0 text-primary" strokeWidth={1.75} />
+                  <div className="min-w-0">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">Tanggal</p>
+                    <p className="text-sm font-bold leading-snug text-foreground">Rabu, 4 November 2026</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-primary" strokeWidth={1.75} />
+                  <div className="min-w-0">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">Lokasi</p>
+                    <p className="text-sm font-bold leading-snug text-foreground">Good Story Cafe, Jl. Sudirman Copong No. 11, Garut</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Ticket className="mt-0.5 h-5 w-5 shrink-0 text-primary" strokeWidth={1.75} />
+                  <div className="min-w-0">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">Harga</p>
+                    <p className="text-sm font-bold leading-snug text-foreground">Gratis, langsung datang aja</p>
+                  </div>
+                </div>
+              </aside>
             </div>
           </Link>
+
 
 
         </section>
