@@ -91,5 +91,7 @@
 - [x] Home: kartu "Event Mendatang" dibuat membentang selebar layar di desktop (1216×362) — poster utuh 3:4 di kiri, judul+deskripsi di tengah, panel Tanggal/Lokasi/Harga di kanan; di HP tetap poster di atas lalu teks.
 - [x] Home: bagian "Upcoming Event" dihapus (dobel dengan "Event Mendatang" di atasnya); kode carousel Embla yang jadi tak terpakai ikut dibersihkan.
 - [x] Event Mendatang: tulisan "bersama Saduli Ragap" dipasang di sampul (pill berikon mic di bawah judul + baris "Bintang Tamu" di panel kanan), dan bintang tamu yang sama masuk ke halaman detail event; 3 tes baru lulus, 195 tes lulus semua.
+- [x] Remix: set migration dicek ulang — masih kosong (nol file SQL, nol entri jurnal) jadi tidak ada file salinan yang perlu dibuang; database tetap 19 tabel jadi baseline.
+
 
 
