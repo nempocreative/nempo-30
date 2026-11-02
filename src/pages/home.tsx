@@ -53,8 +53,6 @@ type HeroBanner = {
 };
 
 
-
-
 function voucherColors(type: string): { from: string; to: string; shadow: string } {
   const map: Record<string, { from: string; to: string; shadow: string }> = {
     new_user:     { from: "#0194f3", to: "#0172B1", shadow: "#003d8f" },
@@ -1598,8 +1596,6 @@ export default function Home() {
         </div>
       </div>
 
-
-
       {/* ══ MAIN CONTENT ══════════════════════════════════════════════════════ */}
       <style>{`
         .home-content {
@@ -2288,129 +2284,8 @@ export default function Home() {
             </div>
           </Link>
 
-
-
-
-
         </section>
 
-        {/* ── Upcoming Event ── */}
-        {activeEventItems.length > 0 && (() => {
-          const cafeEvents = activeEventItems;
-          const hasCafe = cafeEvents.length > 0;
-          return (
-            <section id="cafe-section" className="home-section-events relative">
-              {/* ─── Header ─── */}
-              <div className="relative flex items-center gap-3 mb-4">
-                {/* Icon box — animated pulse, cafe-warm styling */}
-                <div
-                  className="relative w-10 h-10 rounded-2xl flex items-center justify-center shrink-0"
-                  style={{ background: "linear-gradient(135deg, #78350f 0%, #b45309 55%, #d97706 100%)", boxShadow: "0 4px 14px rgba(180,83,9,0.30)" }}
-                >
-                  <span className="absolute inset-0 rounded-2xl animate-ping opacity-30" style={{ background: "#d97706" }} />
-                  <CalendarDays className="relative w-5 h-5 text-white" strokeWidth={1.75} />
-                </div>
-
-                {/* Title block — flex-1 min-w-0 to prevent overflow */}
-                <div className="flex-1 min-w-0">
-                  <h2 className="text-gray-900 font-black text-base leading-tight">Upcoming Event</h2>
-                  <p className="text-amber-600/80 text-[10px] font-bold uppercase tracking-[0.10em] leading-snug mt-0.5">
-                    Jangan sampai ketinggalan
-                  </p>
-                </div>
-
-                {/* CTA — shrink-0 so it never squishes */}
-                {hasCafe && (
-                  <Link
-                    href="/event"
-                    className="flex items-center gap-0.5 text-[11px] font-bold shrink-0 px-2.5 py-1.5 rounded-xl"
-                    style={{ color: "#92400e", background: "rgba(146,64,14,0.09)" }}
-                  >
-                    Semua <ChevronRight className="h-3 w-3" />
-                  </Link>
-                )}
-              </div>
-
-              {/* ─── Content ─── */}
-              <div>
-                {hasCafe ? (
-                  <>
-                    {/* Single-row auto-sliding carousel — center card pops, rest fade out with distance.
-                        Scale/opacity are driven imperatively by Embla's scroll-tween effect above, so
-                        they stay perfectly in sync with the real scroll position (no jump/disappear glitches). */}
-                    <div className="overflow-hidden -mx-4 px-4" ref={eventCarouselRef}>
-                      <div className="flex gap-3 py-2">
-                        {cafeEvents.slice(0, 12).map(ev => (
-                          <div key={ev.id} className="shrink-0">
-                            <CafeEventCard ev={ev} />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Dot indicators */}
-                    {cafeEvents.length > 1 && (
-                      <div className="flex justify-center gap-1.5 mt-3">
-                        {cafeEvents.slice(0, 12).map((_, i) => (
-                          <button
-                            key={i}
-                            onClick={() => eventCarouselApi?.scrollTo(i)}
-                            className="rounded-full transition-all duration-300"
-                            style={{
-                              width: i === activeCafe ? 18 : 6,
-                              height: 6,
-                              background: i === activeCafe ? "#b45309" : "#d6c4a8",
-                            }}
-                            aria-label={`Acara ${i + 1}`}
-                          />
-                        ))}
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  /* ─── Empty state ─── */
-                  <div className="flex items-start gap-3">
-                    {/* Icon column */}
-                    <div
-                      className="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center"
-                      style={{ background: "linear-gradient(135deg, #fef3e2, #fde68a40)" }}
-                    >
-                      <Coffee className="w-5 h-5 text-amber-500" strokeWidth={1.75} />
-                    </div>
-                    {/* Text + CTA */}
-                    <div className="flex-1 min-w-0 text-left">
-                      <p className="text-gray-800 font-bold text-[13px] leading-snug mb-1">Belum ada acara aktif saat ini</p>
-                      <p className="text-gray-500 text-[11.5px] leading-relaxed mb-3">
-                        Nobar Persib, live acoustic, arisan komunitas, talkshow — jadwalkan acaramu bersama kami!
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        <a
-                          href={NEMPO_CONSULT_URL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold text-white transition-all hover:scale-[1.03] active:scale-95"
-                          style={{ background: "linear-gradient(135deg, #25D366, #1EBE57)", boxShadow: "0 3px 10px rgba(37,211,102,0.35)" }}
-                        >
-                          <svg viewBox="0 0 24 24" className="w-3 h-3 fill-current shrink-0" aria-hidden="true">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                          </svg>
-                          Jadwalkan Acara
-                        </a>
-                        <Link
-                          href="/event"
-                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold transition-all hover:scale-[1.03] active:scale-95"
-                          style={{ background: "rgba(146,64,14,0.10)", color: "#92400e" }}
-                        >
-                          Event Lainnya <ChevronRight className="h-3 w-3" />
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </section>
-          );
-        })()}
 
         {/* ── AI photo banners ── */}
         <div className="home-section-partnership">
