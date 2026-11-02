@@ -88,3 +88,6 @@
 - [x] Tim beranda: foto ke-13 (kiriman 20.47.07) dipasang — wajah dicocokkan dengan aslinya, jas navy + kaus putih, tangan sedekap, latar biru muda; baris tim kini 13 potret asli, semua termuat, build OK.
 - [x] Recruitment: tanpa ikon/logo bintang; pilihan minat jadi Designer, Web Developer, Content Creator, Videografer dan Fotographer, Marketing, Event Management; kirim formulir langsung ke WhatsApp.
 - [x] Notifikasi: 12 isi diambil dari konten situs sendiri (acara portofolio, recruitment, harga paket, kanal kontak); panel lonceng dan halaman /notifikasi bisa diklik ke halaman aslinya; 7 tes lulus.
+- [x] Home: kartu "Event Mendatang" dikecilkan di desktop (576×255, poster utuh 3:4, teks rapat tanpa ruang kosong) — sebelumnya poster penuh selebar halaman.
+- [x] Home: bagian "Upcoming Event" dihapus (dobel dengan "Event Mendatang" di atasnya); kode carousel Embla yang jadi tak terpakai ikut dibersihkan.
+
