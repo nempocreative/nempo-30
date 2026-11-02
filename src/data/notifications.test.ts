@@ -11,7 +11,7 @@ const routeSource = readFileSync(resolve(process.cwd(), "src/nempo-app.tsx"), "u
 const registeredPaths = [...routeSource.matchAll(/<Route path="([^"]+)"/g)].map((m) => m[1]);
 
 const messageFor = (href: string) =>
-  notificationItems.filter((n) => n.href === href).map((n) => n.message).join(" ");
+  notificationItems.filter((n) => n.href === href).map((n) => `${n.title} ${n.message}`).join(" ");
 
 describe("isi notifikasi", () => {
   it("setiap tautan menunjuk halaman yang benar-benar terdaftar", () => {
@@ -23,8 +23,12 @@ describe("isi notifikasi", () => {
 
   it("tidak menyebut menu yang sudah dihapus dari situs", () => {
     const all = notificationItems.map((n) => `${n.title} ${n.message}`).join(" ").toLowerCase();
-    for (const removed of ["metode pembayaran", "wishlist", "pesanan", "keranjang", "profil", "profile"]) {
+    for (const removed of ["metode pembayaran", "wishlist", "pesanan", "keranjang"]) {
       expect(all, `notifikasi masih menyebut "${removed}"`).not.toContain(removed);
+    }
+    const paths = notificationItems.map((n) => n.href.split("#", 1)[0]);
+    for (const gone of ["/profile", "/wishlist", "/pesanan-saya"]) {
+      expect(paths, `notifikasi masih menautkan ${gone}`).not.toContain(gone);
     }
   });
 
@@ -65,6 +69,6 @@ describe("isi notifikasi", () => {
     expect(list[0]?.id).toBe(1);
     expect(list[0]?.created_at).toBe("2026-11-02T13:00:00.000Z");
     expect(list.at(-1)?.id).toBe(12);
-    expect(list.at(-1)?.created_at).toBe("2026-10-29T06:00:00.000Z");
+    expect(list.at(-1)?.created_at).toBe("2026-10-30T06:00:00.000Z");
   });
 });
