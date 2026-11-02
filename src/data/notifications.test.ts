@@ -1,12 +1,10 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { buildNotifications, notificationItems } from "./notifications";
-import { designCreativePrices } from "./design-creative";
+import { DESIGN_PRICES, designRupiah } from "./design-creative";
 import { weddingPackages, weddingRupiah } from "./wedding-packages";
-import { webDevelopmentPackages } from "./web-development";
+import { WEBSITE_PACKAGES, webRupiah } from "./web-development";
 import { SOSMED_UMKM_PROMO, rupiah } from "./sosmed-packages";
-
-const rp = (n: number) => `Rp${n.toLocaleString("id-ID")}`;
 
 const routeSource = readFileSync(new URL("../nempo-app.tsx", import.meta.url), "utf8");
 const registeredPaths = [...routeSource.matchAll(/<Route path="([^"]+)"/g)].map((m) => m[1]);
@@ -46,18 +44,18 @@ describe("isi notifikasi", () => {
   it("harga desain kreatif sama dengan daftar harga resmi", () => {
     const msg = messageFor("/design-creative");
     for (const id of ["story", "feed", "poster", "banner", "logo", "branding"]) {
-      const price = designCreativePrices.find((p) => p.id === id);
+      const price = DESIGN_PRICES.find((p) => p.id === id);
       expect(price, `harga ${id} tidak ada di data`).toBeDefined();
-      expect(msg).toContain(rp(price!.price));
+      expect(msg).toContain(designRupiah(price!.price));
     }
   });
 
   it("harga website sama dengan daftar harga resmi", () => {
     const msg = messageFor("/web-development");
     for (const id of ["landing-page", "umkm", "company-profile", "professional", "ecommerce"]) {
-      const pkg = webDevelopmentPackages.find((p) => p.id === id);
+      const pkg = WEBSITE_PACKAGES.find((p) => p.id === id);
       expect(pkg, `paket ${id} tidak ada di data`).toBeDefined();
-      expect(msg).toContain(rp(pkg!.price));
+      expect(msg).toContain(webRupiah(pkg!.price));
     }
   });
 
