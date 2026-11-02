@@ -2260,15 +2260,31 @@ export default function Home() {
               <p className="text-muted-foreground text-[10px] font-bold uppercase tracking-[0.10em] mt-0.5">Catat tanggalnya, ayo datang bareng!</p>
             </div>
           </div>
-          <Link href="/event/musicomedy-night" className="block rounded-3xl overflow-hidden border border-border bg-card shadow-sm">
-            <img src={musicomedyPoster.url} alt="Poster MusiComedy Night" className="w-full aspect-[4/5] object-cover" loading="lazy" />
-            <div className="p-4">
-              <p className="text-[11px] font-bold uppercase tracking-wider text-primary">Rabu, 4 November 2026</p>
-              <h3 className="text-lg font-black text-foreground leading-tight mt-1">MusiComedy Night</h3>
-              <p className="text-sm text-muted-foreground mt-1">NEMPO.ID × Kala Muda · Good Story Cafe, Jl. Sudirman Copong No. 11, Garut</p>
-              <span className="inline-block mt-3 text-sm font-bold text-primary">Lihat detail event →</span>
+          <Link
+            href="/event/musicomedy-night"
+            className="group block overflow-hidden rounded-3xl border border-border bg-card shadow-sm"
+          >
+            <div className="flex flex-col sm:flex-row">
+              <div className="relative w-full overflow-hidden sm:w-[220px] sm:shrink-0">
+                <img
+                  src={musicomedyPoster.url}
+                  alt="Poster MusiComedy Night"
+                  className="h-[260px] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03] sm:h-full sm:min-h-[260px]"
+                  loading="lazy"
+                />
+              </div>
+              <div className="flex flex-1 flex-col justify-center p-4 sm:p-6">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-primary">Rabu, 4 November 2026</p>
+                <h3 className="mt-1 text-xl font-black leading-tight text-foreground sm:text-2xl">MusiComedy Night</h3>
+                <p className="mt-1 text-sm text-muted-foreground">NEMPO.ID × Kala Muda · Good Story Cafe, Jl. Sudirman Copong No. 11, Garut</p>
+                <span className="mt-3 inline-flex w-fit items-center gap-1 rounded-full bg-primary/10 px-3 py-1.5 text-sm font-bold text-primary">
+                  Lihat detail event
+                  <ChevronRight className="h-3.5 w-3.5" />
+                </span>
+              </div>
             </div>
           </Link>
+
         </section>
 
         {/* ── Upcoming Event ── */}
