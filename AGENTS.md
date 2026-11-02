@@ -10,6 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Architecture rules
+- Main-site API requests use the root-relative `/api` prefix; event ticket reads resolve the event slug or id before querying its tickets; why: inherited parent-directory URLs can fail in previews and tickets are keyed by numeric event id.
 - Graphic design prices and monthly limits live in `src/data/design-creative.ts`; WCC and LO packages live in dedicated browser-safe data modules displayed on their parent Wedding/EO pages; why: each service and its rule tests share one authoritative price source.
 - Current website packages, additional fees, exclusions and package-specific consultation links live in `src/data/web-development.ts`, separate from legacy digital services and business-system plans; why: website price updates must not silently change other service pages.
 - MusiComedy slide variants share the frame component; the talent-free variant contains its own scoped cafe animation, respecting reduced motion; why: slide 32 atmosphere must not change slide 31's performers.
