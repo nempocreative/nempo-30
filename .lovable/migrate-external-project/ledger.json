@@ -1,7 +1,8 @@
 [
-  {"capability":"code, pages, assets","source":"github nempocreative/nempo-20","outcome":"migrate","status":"verified","next_action":"none"},
+  {"capability":"code, pages, assets","source":"github nempocreative/nempo-25","outcome":"migrate","status":"verified","next_action":"none"},
   {"capability":"schema (19 tables)","source":"types.ts","outcome":"migrate","status":"verified","next_action":"none"},
-  {"capability":"records","source":"old Lovable Cloud database","outcome":"migrate","status":"pending","next_action":"user exports tables as CSV/JSON"},
+  {"capability":"records","source":"previous Lovable Cloud database","outcome":"migrate","status":"pending","next_action":"user downloads /backup JSON from old site or exports tables as CSV/JSON"},
   {"capability":"auth users","source":"none detected in app code","outcome":"n/a","status":"verified","next_action":"none"},
-  {"capability":"community application form","source":"komunitas page","outcome":"migrate","status":"implemented","next_action":"submit test entry"}
+  {"capability":"community application form","source":"komunitas page","outcome":"migrate","status":"implemented","next_action":"submit test entry"},
+  {"capability":"CMS/admin external API","source":"VITE_NEMPO_GARUT_API_URL","outcome":"preserve","status":"pending","next_action":"provide API URL if CMS should be live"}
 ]
