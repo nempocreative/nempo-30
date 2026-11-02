@@ -29,7 +29,7 @@ export const notificationItems: NotificationItem[] = [
     type: "event",
     title: "Ayo intip event terbaru kita!",
     message:
-      "Riuh Rona — 5 September 2026 di Maru — baru masuk portofolio. Dari Secangkir Kopi sampai Grand Opening GGS Beauty, semuanya ada di bagian Event halaman Portofolio. Mau acaramu ikut tampil di sini?",
+      "Riuh Rona — 4 November 2026 di Maru — baru masuk portofolio. Dari Secangkir Kopi sampai Grand Opening GGS Beauty, semuanya ada di bagian Event halaman Portofolio. Mau acaramu ikut tampil di sini?",
     href: "/portofolio#event",
     hoursAgo: 1,
   },
