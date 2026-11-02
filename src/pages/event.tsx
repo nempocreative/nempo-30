@@ -13,6 +13,8 @@ import {
   Instagram, Users,
 } from "lucide-react";
 import { NEMPO_CONSULT_URL } from "@/lib/contact";
+import { toSnake } from "@/lib/api-keys";
+
 
 const API = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
 
@@ -345,7 +347,7 @@ export default function EventPage() {
       try {
         const eventResponse = await fetch(`${API}/events`, { cache: "no-store" });
         const eventData = eventResponse.ok ? await eventResponse.json() : [];
-        if (!cancelled) setEvents(Array.isArray(eventData) ? eventData : []);
+        if (!cancelled) setEvents(Array.isArray(eventData) ? toSnake<Event[]>(eventData) : []);
       } catch {
         if (!cancelled) setEvents([]);
       } finally {
