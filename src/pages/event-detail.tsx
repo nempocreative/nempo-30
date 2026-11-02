@@ -1962,7 +1962,7 @@ export default function EventDetail() {
                     {["VIP", "Lantai 2", "Lantai 3"].map(area => (
                       <a
                         key={area}
-                        href={`https://wa.me/6285724981356?text=${encodeURIComponent(`Halo NEMPO, saya mau reservasi kursi area ${area} untuk event ${event.title || event.name}.\nNama: \nJumlah orang: `)}`}
+                        href={`https://wa.me/6285724981356?text=${encodeURIComponent(`Halo NEMPO, saya mau reservasi kursi area ${area} untuk event ${event.name}.\nNama: \nJumlah orang: `)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="rounded-xl border border-gray-200 py-2.5 text-center text-xs font-bold text-gray-800 hover:border-gray-400"
