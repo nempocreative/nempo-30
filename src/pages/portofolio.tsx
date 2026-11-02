@@ -28,7 +28,7 @@ export default function PortofolioPage() {
         path="/portofolio"
       />
 
-      <main className="min-h-screen overflow-hidden bg-white text-[#17233a]">
+      <main className="min-h-screen overflow-x-clip bg-white text-[#17233a]">
         {/* ===== HEADER ===== */}
         <section className="relative overflow-hidden text-white" style={{ background: "linear-gradient(145deg, #0172B1 0%, #0194f3 55%, #1BA0E2 100%)" }}>
           <div className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-sky-400/10 blur-3xl" />

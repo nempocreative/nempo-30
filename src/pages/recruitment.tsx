@@ -1,7 +1,7 @@
 import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
 import { CommunityApplicationForm } from "@/components/community-application-form";
-import { CheckCircle2, Users } from "lucide-react";
+import { CheckCircle2, Users, Sparkles, Handshake, GraduationCap, CalendarHeart } from "lucide-react";
 
 export default function RecruitmentPage() {
   return (
@@ -52,13 +52,41 @@ export default function RecruitmentPage() {
                 </li>
               ))}
             </ul>
+            <a href="#gabung" className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#a62f78] px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#a62f78]/30 transition hover:-translate-y-0.5">
+              Daftar sekarang
+            </a>
+          </div>
+        </section>
+
+        {/* ===== PERKS ===== */}
+        <section className="border-b border-[#dce4fb]">
+          <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8">
+            <h2 className="text-2xl font-black tracking-[-0.035em] sm:text-3xl">Yang kamu dapat</h2>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { icon: CalendarHeart, t: "Terlibat di event", d: "Ikut jadi bagian tim di acara-acara Nempo." },
+                { icon: GraduationCap, t: "Belajar langsung", d: "Asah skill kreatif, konten, dan organisasi bareng tim." },
+                { icon: Handshake, t: "Relasi baru", d: "Kenalan dengan anak muda dan kreator se-Jawa Barat." },
+                { icon: Sparkles, t: "Portofolio nyata", d: "Pengalaman yang bisa kamu tunjukkan ke mana saja." },
+              ].map(({ icon: Icon, t, d }) => (
+                <div key={t} className="rounded-3xl border border-[#e5d3e6] bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#a62f78]/10 text-[#a62f78]"><Icon className="h-5 w-5" /></span>
+                  <p className="mt-4 text-sm font-extrabold text-[#37215b]">{t}</p>
+                  <p className="mt-1 text-xs leading-5 text-[#62677c]">{d}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* ===== FORM ===== */}
         <section id="gabung" className="scroll-mt-24 border-b border-[#d9daf3]">
           <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-            <CommunityApplicationForm />
+            <div className="rounded-[2rem] border border-[#e5d3e6] bg-white p-5 shadow-xl shadow-[#6e4bb4]/10 sm:p-8">
+              <h2 className="text-xl font-black tracking-[-0.03em] sm:text-2xl">Formulir pendaftaran</h2>
+              <p className="mt-1 mb-6 text-sm text-[#62677c]">Cuma butuh 1 menit. Kami hubungi lewat WhatsApp.</p>
+              <CommunityApplicationForm />
+            </div>
           </div>
         </section>
       </main>
