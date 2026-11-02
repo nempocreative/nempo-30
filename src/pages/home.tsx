@@ -2262,28 +2262,33 @@ export default function Home() {
           </div>
           <Link
             href="/event/musicomedy-night"
-            className="group block overflow-hidden rounded-3xl border border-border bg-card shadow-sm"
+            className="group mx-auto block w-full max-w-3xl overflow-hidden rounded-3xl border border-border bg-card shadow-sm"
           >
             <div className="flex flex-col sm:flex-row">
-              <div className="relative w-full overflow-hidden sm:w-[220px] sm:shrink-0">
+              <div className="relative w-full overflow-hidden sm:w-[200px] sm:shrink-0">
                 <img
                   src={musicomedyPoster.url}
                   alt="Poster MusiComedy Night"
-                  className="h-[260px] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03] sm:h-full sm:min-h-[260px]"
+                  className="aspect-[3/4] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   loading="lazy"
                 />
               </div>
-              <div className="flex flex-1 flex-col justify-center p-4 sm:p-6">
-                <p className="text-[11px] font-bold uppercase tracking-wider text-primary">Rabu, 4 November 2026</p>
-                <h3 className="mt-1 text-xl font-black leading-tight text-foreground sm:text-2xl">MusiComedy Night</h3>
-                <p className="mt-1 text-sm text-muted-foreground">NEMPO.ID × Kala Muda · Good Story Cafe, Jl. Sudirman Copong No. 11, Garut</p>
-                <span className="mt-3 inline-flex w-fit items-center gap-1 rounded-full bg-primary/10 px-3 py-1.5 text-sm font-bold text-primary">
+              <div className="flex flex-1 flex-col justify-center gap-1.5 p-4 sm:p-5">
+                <div className="flex flex-wrap items-center gap-2">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-primary">Rabu, 4 November 2026</p>
+                  <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-primary">Gratis</span>
+                </div>
+                <h3 className="text-xl font-black leading-tight text-foreground sm:text-2xl">MusiComedy Night</h3>
+                <p className="text-sm text-muted-foreground">NEMPO.ID × Kala Muda · Good Story Cafe, Jl. Sudirman Copong No. 11, Garut</p>
+                <p className="text-sm text-muted-foreground">Malam musik dan komedi bareng NEMPO.ID × Kala Muda di Good Story Cafe.</p>
+                <span className="mt-1 inline-flex w-fit items-center gap-1 rounded-full bg-primary/10 px-3 py-1.5 text-sm font-bold text-primary">
                   Lihat detail event
                   <ChevronRight className="h-3.5 w-3.5" />
                 </span>
               </div>
             </div>
           </Link>
+
 
         </section>
 
