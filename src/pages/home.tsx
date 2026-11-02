@@ -731,7 +731,7 @@ const INFO_BANNERS = [
     image: digitalGrowthBannerImage,
     alt: "Tim kreatif NEMPO berdiskusi konsep wedding, event, dan konten",
     title: "Tumbuh bersama NEMPO Organizer.",
-    description: "Event & wedding organizer, sosmed management, desain kreatif, web development, sampai talent management — semua ada di satu tim.",
+    description: "Acara, wedding, sosmed, desain, sampai talent — semua ada di satu tim.",
     cta: "Lihat layanan & harga",
   },
 
