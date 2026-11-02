@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { SEO } from "@/components/seo";
+import musicomedyPoster from "@/assets/musicomedy-night-poster.webp.asset.json";
 import { Layout } from "@/components/layout";
 import { PlacePhoto } from "@/components/place-photo";
 import { Search, MapPin, MapPinned, Route, TrainFront, ChevronRight, ArrowRight, Flame, ThumbsUp, Info, Map, CalendarDays, Users, Building2, Ticket, Leaf, Award, Gift, TreePine, Heart, Mountain, Compass, Droplets, Wind, Eye, Thermometer, Newspaper, Clock, Radio, UtensilsCrossed, UserPlus, Star, Shield, Crown, Coffee, Music, Tv, Mic, BookOpen, Instagram } from "lucide-react";
