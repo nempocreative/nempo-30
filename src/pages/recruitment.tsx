@@ -84,7 +84,7 @@ export default function RecruitmentPage() {
           <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
             <div className="rounded-[2rem] border border-[#e5d3e6] bg-white p-5 shadow-xl shadow-[#6e4bb4]/10 sm:p-8">
               <h2 className="text-xl font-black tracking-[-0.03em] sm:text-2xl">Formulir pendaftaran</h2>
-              <p className="mt-1 mb-6 text-sm text-[#62677c]">Cuma butuh 1 menit. Kami hubungi lewat WhatsApp.</p>
+              <p className="mt-1 mb-6 text-sm text-[#62677c]">Cuma butuh 1 menit. Isianmu langsung dibuka di WhatsApp resmi Nempo.</p>
               <CommunityApplicationForm />
             </div>
           </div>
