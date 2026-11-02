@@ -4,7 +4,6 @@ import musicomedyPoster from "@/assets/musicomedy-night-poster.webp.asset.json";
 import { Layout } from "@/components/layout";
 import { PlacePhoto } from "@/components/place-photo";
 import { Search, MapPin, MapPinned, Route, TrainFront, ChevronRight, ArrowRight, Flame, ThumbsUp, Info, Map, CalendarDays, Users, Building2, Ticket, Leaf, Award, Gift, TreePine, Heart, Mountain, Compass, Droplets, Wind, Eye, Thermometer, Newspaper, Clock, Radio, UtensilsCrossed, UserPlus, Star, Shield, Crown, Coffee, Music, Tv, Mic, BookOpen, Instagram } from "lucide-react";
-import useEmblaCarousel from "embla-carousel-react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { Link, useLocation } from "@/lib/wouter";
 import { CategoryGrid } from "@/components/icons3d";
@@ -51,8 +50,6 @@ type HeroBanner = {
   active: boolean;
   instagramHandle?: string;
 };
-
-
 
 
 function voucherColors(type: string): { from: string; to: string; shadow: string } {
@@ -772,10 +769,8 @@ export default function Home() {
   const [, navigate] = useLocation();
   const isAppFrame = typeof window !== "undefined" && new URLSearchParams(window.location.search).get("app") === "1";
   const { selectedCity, matchesCity } = useCityFilter();
-  const [eventCarouselRef, eventCarouselApi] = useEmblaCarousel({ loop: true, align: "center", containScroll: false });
   const [activeHero, setActiveHero] = useState(0);
   const [activeEvent, setActiveEvent] = useState(0);
-  const [activeCafe, setActiveCafe] = useState(0);
   const [activeDiskon, setActiveDiskon] = useState(0);
   const diskonTouchX = useRef(0);
   const [infoBannerIdx, setInfoBannerIdx] = useState(0);
@@ -958,92 +953,6 @@ export default function Home() {
     const t = setInterval(() => setFactIdx(i => (i + 1) % 4), 3000);
     return () => clearInterval(t);
   }, []);
-
-  // Auto-advance Upcoming Event carousel + keep activeCafe in sync with the selected slide
-  useEffect(() => {
-    if (!eventCarouselApi) return;
-    const onSelect = () => setActiveCafe(eventCarouselApi.selectedScrollSnap());
-    eventCarouselApi.on("select", onSelect);
-    onSelect();
-    const interval = setInterval(() => eventCarouselApi.scrollNext(), 3000);
-    return () => {
-      eventCarouselApi.off("select", onSelect);
-      clearInterval(interval);
-    };
-  }, [eventCarouselApi]);
-
-
-  // Smooth per-frame scale + fade tied to live scroll position (Embla's official "tween" pattern) —
-  // avoids the jump/disappear glitches that come from re-applying CSS transitions on discrete index changes.
-  const eventTweenFactor = useRef(0);
-  const eventTweenNodes = useRef<(HTMLDivElement | null)[]>([]);
-  useEffect(() => {
-    if (!eventCarouselApi) return;
-
-    const MIN_OPACITY = 0.15;
-    const MIN_SCALE = 0.7;
-    const numberWithinRange = (n: number, min: number, max: number) => Math.min(Math.max(n, min), max);
-
-    const setTweenNodes = (api: typeof eventCarouselApi) => {
-      eventTweenNodes.current = api.slideNodes().map(n => n.firstElementChild as HTMLDivElement | null);
-    };
-    const setTweenFactor = (api: typeof eventCarouselApi) => {
-      eventTweenFactor.current = 0.4 * api.scrollSnapList().length;
-    };
-    const tween = (api: typeof eventCarouselApi, eventName?: string) => {
-      const engine = (api as any).internalEngine();
-      const scrollProgress = api.scrollProgress();
-      const slidesInView = api.slidesInView();
-      const isScrollEvent = eventName === "scroll";
-
-      api.scrollSnapList().forEach((scrollSnap, snapIndex) => {
-        let diffToTarget = scrollSnap - scrollProgress;
-        const slidesInSnap: number[] = engine.slideRegistry[snapIndex] ?? [];
-
-        slidesInSnap.forEach((slideIndex: number) => {
-          if (isScrollEvent && !slidesInView.includes(slideIndex)) return;
-
-          if (engine.options.loop) {
-            engine.slideLooper.loopPoints.forEach((loopItem: any) => {
-              const target = loopItem.target();
-              if (slideIndex === loopItem.index && target !== 0) {
-                const sign = Math.sign(target);
-                if (sign === -1) diffToTarget = scrollSnap - (1 + scrollProgress);
-                if (sign === 1) diffToTarget = scrollSnap + (1 - scrollProgress);
-              }
-            });
-          }
-
-          const tweenValue = 1 - Math.abs(diffToTarget * eventTweenFactor.current);
-          const scale = numberWithinRange(tweenValue, MIN_SCALE, 1);
-          const opacity = numberWithinRange(tweenValue, MIN_OPACITY, 1);
-          const node = eventTweenNodes.current[slideIndex];
-          if (node) node.style.transform = `scale(${scale})`, node.style.opacity = String(opacity);
-        });
-      });
-    };
-
-    setTweenNodes(eventCarouselApi);
-    setTweenFactor(eventCarouselApi);
-    tween(eventCarouselApi);
-
-    eventCarouselApi
-      .on("reInit", setTweenNodes)
-      .on("reInit", setTweenFactor)
-      .on("reInit", tween)
-      .on("scroll", tween)
-      .on("slideFocus", tween);
-
-    return () => {
-      eventCarouselApi
-        .off("reInit", setTweenNodes)
-        .off("reInit", setTweenFactor)
-        .off("reInit", tween)
-        .off("scroll", tween)
-        .off("slideFocus", tween);
-    };
-  }, [eventCarouselApi]);
-
 
   // Filter event yang belum selesai (today atau upcoming)
   const activeEventItems = (eventItems ?? []).filter(ev => {
@@ -1597,8 +1506,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-
 
       {/* ══ MAIN CONTENT ══════════════════════════════════════════════════════ */}
       <style>{`
@@ -2260,134 +2167,36 @@ export default function Home() {
               <p className="text-muted-foreground text-[10px] font-bold uppercase tracking-[0.10em] mt-0.5">Catat tanggalnya, ayo datang bareng!</p>
             </div>
           </div>
-          <Link href="/event/musicomedy-night" className="block rounded-3xl overflow-hidden border border-border bg-card shadow-sm">
-            <img src={musicomedyPoster.url} alt="Poster MusiComedy Night" className="w-full aspect-[4/5] object-cover" loading="lazy" />
-            <div className="p-4">
-              <p className="text-[11px] font-bold uppercase tracking-wider text-primary">Rabu, 4 November 2026</p>
-              <h3 className="text-lg font-black text-foreground leading-tight mt-1">MusiComedy Night</h3>
-              <p className="text-sm text-muted-foreground mt-1">NEMPO.ID × Kala Muda · Good Story Cafe, Jl. Sudirman Copong No. 11, Garut</p>
-              <span className="inline-block mt-3 text-sm font-bold text-primary">Lihat detail event →</span>
+          <Link
+            href="/event/musicomedy-night"
+            className="group mx-auto block w-full max-w-xl overflow-hidden rounded-3xl border border-border bg-card shadow-sm"
+          >
+            <div className="flex flex-col sm:flex-row">
+              <div className="relative w-full overflow-hidden sm:w-[190px] sm:shrink-0">
+                <img
+                  src={musicomedyPoster.url}
+                  alt="Poster MusiComedy Night"
+                  className="aspect-[3/4] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  loading="lazy"
+                />
+              </div>
+              <div className="flex flex-1 flex-col justify-center gap-1 p-4 sm:p-5">
+                <div className="flex flex-wrap items-center gap-2">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-primary">Rabu, 4 November 2026</p>
+                  <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-primary">Gratis</span>
+                </div>
+                <h3 className="mt-0.5 text-lg font-black leading-tight text-foreground">MusiComedy Night</h3>
+                <p className="mt-0.5 text-[13px] leading-snug text-muted-foreground">NEMPO.ID × Kala Muda · Good Story Cafe, Jl. Sudirman Copong No. 11, Garut</p>
+                <span className="mt-2 inline-flex w-fit items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-[13px] font-bold text-primary">
+                  Lihat detail event
+                  <ChevronRight className="h-3.5 w-3.5" />
+                </span>
+              </div>
             </div>
           </Link>
+
         </section>
 
-        {/* ── Upcoming Event ── */}
-        {activeEventItems.length > 0 && (() => {
-          const cafeEvents = activeEventItems;
-          const hasCafe = cafeEvents.length > 0;
-          return (
-            <section id="cafe-section" className="home-section-events relative">
-              {/* ─── Header ─── */}
-              <div className="relative flex items-center gap-3 mb-4">
-                {/* Icon box — animated pulse, cafe-warm styling */}
-                <div
-                  className="relative w-10 h-10 rounded-2xl flex items-center justify-center shrink-0"
-                  style={{ background: "linear-gradient(135deg, #78350f 0%, #b45309 55%, #d97706 100%)", boxShadow: "0 4px 14px rgba(180,83,9,0.30)" }}
-                >
-                  <span className="absolute inset-0 rounded-2xl animate-ping opacity-30" style={{ background: "#d97706" }} />
-                  <CalendarDays className="relative w-5 h-5 text-white" strokeWidth={1.75} />
-                </div>
-
-                {/* Title block — flex-1 min-w-0 to prevent overflow */}
-                <div className="flex-1 min-w-0">
-                  <h2 className="text-gray-900 font-black text-base leading-tight">Upcoming Event</h2>
-                  <p className="text-amber-600/80 text-[10px] font-bold uppercase tracking-[0.10em] leading-snug mt-0.5">
-                    Jangan sampai ketinggalan
-                  </p>
-                </div>
-
-                {/* CTA — shrink-0 so it never squishes */}
-                {hasCafe && (
-                  <Link
-                    href="/event"
-                    className="flex items-center gap-0.5 text-[11px] font-bold shrink-0 px-2.5 py-1.5 rounded-xl"
-                    style={{ color: "#92400e", background: "rgba(146,64,14,0.09)" }}
-                  >
-                    Semua <ChevronRight className="h-3 w-3" />
-                  </Link>
-                )}
-              </div>
-
-              {/* ─── Content ─── */}
-              <div>
-                {hasCafe ? (
-                  <>
-                    {/* Single-row auto-sliding carousel — center card pops, rest fade out with distance.
-                        Scale/opacity are driven imperatively by Embla's scroll-tween effect above, so
-                        they stay perfectly in sync with the real scroll position (no jump/disappear glitches). */}
-                    <div className="overflow-hidden -mx-4 px-4" ref={eventCarouselRef}>
-                      <div className="flex gap-3 py-2">
-                        {cafeEvents.slice(0, 12).map(ev => (
-                          <div key={ev.id} className="shrink-0">
-                            <CafeEventCard ev={ev} />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Dot indicators */}
-                    {cafeEvents.length > 1 && (
-                      <div className="flex justify-center gap-1.5 mt-3">
-                        {cafeEvents.slice(0, 12).map((_, i) => (
-                          <button
-                            key={i}
-                            onClick={() => eventCarouselApi?.scrollTo(i)}
-                            className="rounded-full transition-all duration-300"
-                            style={{
-                              width: i === activeCafe ? 18 : 6,
-                              height: 6,
-                              background: i === activeCafe ? "#b45309" : "#d6c4a8",
-                            }}
-                            aria-label={`Acara ${i + 1}`}
-                          />
-                        ))}
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  /* ─── Empty state ─── */
-                  <div className="flex items-start gap-3">
-                    {/* Icon column */}
-                    <div
-                      className="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center"
-                      style={{ background: "linear-gradient(135deg, #fef3e2, #fde68a40)" }}
-                    >
-                      <Coffee className="w-5 h-5 text-amber-500" strokeWidth={1.75} />
-                    </div>
-                    {/* Text + CTA */}
-                    <div className="flex-1 min-w-0 text-left">
-                      <p className="text-gray-800 font-bold text-[13px] leading-snug mb-1">Belum ada acara aktif saat ini</p>
-                      <p className="text-gray-500 text-[11.5px] leading-relaxed mb-3">
-                        Nobar Persib, live acoustic, arisan komunitas, talkshow — jadwalkan acaramu bersama kami!
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        <a
-                          href={NEMPO_CONSULT_URL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold text-white transition-all hover:scale-[1.03] active:scale-95"
-                          style={{ background: "linear-gradient(135deg, #25D366, #1EBE57)", boxShadow: "0 3px 10px rgba(37,211,102,0.35)" }}
-                        >
-                          <svg viewBox="0 0 24 24" className="w-3 h-3 fill-current shrink-0" aria-hidden="true">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                          </svg>
-                          Jadwalkan Acara
-                        </a>
-                        <Link
-                          href="/event"
-                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold transition-all hover:scale-[1.03] active:scale-95"
-                          style={{ background: "rgba(146,64,14,0.10)", color: "#92400e" }}
-                        >
-                          Event Lainnya <ChevronRight className="h-3 w-3" />
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </section>
-          );
-        })()}
 
         {/* ── AI photo banners ── */}
         <div className="home-section-partnership">
