@@ -80,10 +80,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Nempo Organizer" },
-      { name: "description", content: "Platform digital pariwisata Garut dan Jawa Barat." },
-      { name: "author", content: "Nempo Organizer" },
-      { name: "theme-color", content: "#0194f3" },
+      { title: "Nempo Garut — Organizer Acara, Wedding & Layanan Kreatif" },
+      {
+        name: "description",
+        content:
+          "Nempo Garut mewujudkan acara, wedding, konten, website, desain, talent, dan sistem usaha di Garut dan Jawa Barat. Konsultasi lewat WhatsApp.",
+      },
+      { name: "author", content: "Nempo Garut" },
+      { name: "theme-color", content: "#0A4EBD" },
+      { property: "og:site_name", content: "Nempo Garut" },
+      { property: "og:locale", content: "id_ID" },
+      { property: "og:type", content: "website" },
     ],
     links: [
       {
