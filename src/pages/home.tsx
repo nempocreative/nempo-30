@@ -2262,7 +2262,7 @@ export default function Home() {
           </div>
           <Link
             href="/event/musicomedy-night"
-            className="group mx-auto block w-full max-w-2xl overflow-hidden rounded-3xl border border-border bg-card shadow-sm"
+            className="group mx-auto block w-full max-w-xl overflow-hidden rounded-3xl border border-border bg-card shadow-sm"
           >
             <div className="flex flex-col sm:flex-row">
               <div className="relative w-full overflow-hidden sm:w-[190px] sm:shrink-0">
