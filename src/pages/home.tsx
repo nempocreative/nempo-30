@@ -4,7 +4,6 @@ import musicomedyPoster from "@/assets/musicomedy-night-poster.webp.asset.json";
 import { Layout } from "@/components/layout";
 import { PlacePhoto } from "@/components/place-photo";
 import { Search, MapPin, MapPinned, Route, TrainFront, ChevronRight, ArrowRight, Flame, ThumbsUp, Info, Map, CalendarDays, Users, Building2, Ticket, Leaf, Award, Gift, TreePine, Heart, Mountain, Compass, Droplets, Wind, Eye, Thermometer, Newspaper, Clock, Radio, UtensilsCrossed, UserPlus, Star, Shield, Crown, Coffee, Music, Tv, Mic, BookOpen, Instagram } from "lucide-react";
-import useEmblaCarousel from "embla-carousel-react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { Link, useLocation } from "@/lib/wouter";
 import { CategoryGrid } from "@/components/icons3d";
@@ -770,10 +769,8 @@ export default function Home() {
   const [, navigate] = useLocation();
   const isAppFrame = typeof window !== "undefined" && new URLSearchParams(window.location.search).get("app") === "1";
   const { selectedCity, matchesCity } = useCityFilter();
-  const [eventCarouselRef, eventCarouselApi] = useEmblaCarousel({ loop: true, align: "center", containScroll: false });
   const [activeHero, setActiveHero] = useState(0);
   const [activeEvent, setActiveEvent] = useState(0);
-  const [activeCafe, setActiveCafe] = useState(0);
   const [activeDiskon, setActiveDiskon] = useState(0);
   const diskonTouchX = useRef(0);
   const [infoBannerIdx, setInfoBannerIdx] = useState(0);
@@ -956,92 +953,6 @@ export default function Home() {
     const t = setInterval(() => setFactIdx(i => (i + 1) % 4), 3000);
     return () => clearInterval(t);
   }, []);
-
-  // Auto-advance Upcoming Event carousel + keep activeCafe in sync with the selected slide
-  useEffect(() => {
-    if (!eventCarouselApi) return;
-    const onSelect = () => setActiveCafe(eventCarouselApi.selectedScrollSnap());
-    eventCarouselApi.on("select", onSelect);
-    onSelect();
-    const interval = setInterval(() => eventCarouselApi.scrollNext(), 3000);
-    return () => {
-      eventCarouselApi.off("select", onSelect);
-      clearInterval(interval);
-    };
-  }, [eventCarouselApi]);
-
-
-  // Smooth per-frame scale + fade tied to live scroll position (Embla's official "tween" pattern) —
-  // avoids the jump/disappear glitches that come from re-applying CSS transitions on discrete index changes.
-  const eventTweenFactor = useRef(0);
-  const eventTweenNodes = useRef<(HTMLDivElement | null)[]>([]);
-  useEffect(() => {
-    if (!eventCarouselApi) return;
-
-    const MIN_OPACITY = 0.15;
-    const MIN_SCALE = 0.7;
-    const numberWithinRange = (n: number, min: number, max: number) => Math.min(Math.max(n, min), max);
-
-    const setTweenNodes = (api: typeof eventCarouselApi) => {
-      eventTweenNodes.current = api.slideNodes().map(n => n.firstElementChild as HTMLDivElement | null);
-    };
-    const setTweenFactor = (api: typeof eventCarouselApi) => {
-      eventTweenFactor.current = 0.4 * api.scrollSnapList().length;
-    };
-    const tween = (api: typeof eventCarouselApi, eventName?: string) => {
-      const engine = (api as any).internalEngine();
-      const scrollProgress = api.scrollProgress();
-      const slidesInView = api.slidesInView();
-      const isScrollEvent = eventName === "scroll";
-
-      api.scrollSnapList().forEach((scrollSnap, snapIndex) => {
-        let diffToTarget = scrollSnap - scrollProgress;
-        const slidesInSnap: number[] = engine.slideRegistry[snapIndex] ?? [];
-
-        slidesInSnap.forEach((slideIndex: number) => {
-          if (isScrollEvent && !slidesInView.includes(slideIndex)) return;
-
-          if (engine.options.loop) {
-            engine.slideLooper.loopPoints.forEach((loopItem: any) => {
-              const target = loopItem.target();
-              if (slideIndex === loopItem.index && target !== 0) {
-                const sign = Math.sign(target);
-                if (sign === -1) diffToTarget = scrollSnap - (1 + scrollProgress);
-                if (sign === 1) diffToTarget = scrollSnap + (1 - scrollProgress);
-              }
-            });
-          }
-
-          const tweenValue = 1 - Math.abs(diffToTarget * eventTweenFactor.current);
-          const scale = numberWithinRange(tweenValue, MIN_SCALE, 1);
-          const opacity = numberWithinRange(tweenValue, MIN_OPACITY, 1);
-          const node = eventTweenNodes.current[slideIndex];
-          if (node) node.style.transform = `scale(${scale})`, node.style.opacity = String(opacity);
-        });
-      });
-    };
-
-    setTweenNodes(eventCarouselApi);
-    setTweenFactor(eventCarouselApi);
-    tween(eventCarouselApi);
-
-    eventCarouselApi
-      .on("reInit", setTweenNodes)
-      .on("reInit", setTweenFactor)
-      .on("reInit", tween)
-      .on("scroll", tween)
-      .on("slideFocus", tween);
-
-    return () => {
-      eventCarouselApi
-        .off("reInit", setTweenNodes)
-        .off("reInit", setTweenFactor)
-        .off("reInit", tween)
-        .off("scroll", tween)
-        .off("slideFocus", tween);
-    };
-  }, [eventCarouselApi]);
-
 
   // Filter event yang belum selesai (today atau upcoming)
   const activeEventItems = (eventItems ?? []).filter(ev => {
