@@ -114,6 +114,7 @@ const marqueeWords = [
   "Seni",
 ];
 
+export default function KomunitasPage() {
   return (
     <Layout>
       <SEO
