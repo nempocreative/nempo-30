@@ -96,3 +96,5 @@
 
 
 
+
+- [x] Event detail banner: full width on desktop, uncropped
