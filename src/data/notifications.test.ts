@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { buildNotifications, notificationItems } from "./notifications";
 import { DESIGN_PRICES, designRupiah } from "./design-creative";
@@ -6,7 +7,7 @@ import { weddingPackages, weddingRupiah } from "./wedding-packages";
 import { WEBSITE_PACKAGES, webRupiah } from "./web-development";
 import { SOSMED_UMKM_PROMO, rupiah } from "./sosmed-packages";
 
-const routeSource = readFileSync(new URL("../nempo-app.tsx", import.meta.url), "utf8");
+const routeSource = readFileSync(resolve(process.cwd(), "src/nempo-app.tsx"), "utf8");
 const registeredPaths = [...routeSource.matchAll(/<Route path="([^"]+)"/g)].map((m) => m[1]);
 
 const messageFor = (href: string) =>
