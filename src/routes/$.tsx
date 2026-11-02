@@ -6,15 +6,17 @@ import { NempoShell } from "@/components/nempo-shell";
 export const Route = createFileRoute("/$")({
   head: () => ({
     meta: [
-      { title: "Nempo Organizer — Garut & Jawa Barat" },
+      { title: "Nempo Garut — Organizer & Platform Kreatif Jawa Barat" },
       {
         name: "description",
-        content: "Platform digital pariwisata Garut: wisata, kuliner, penginapan, dan event.",
+        content:
+          "Halaman Nempo Garut: layanan acara, wedding, undangan digital, sosmed, website, desain, talent, dan sistem usaha, serta wisata, kuliner, dan penginapan di Garut dan Jawa Barat.",
       },
-      { property: "og:title", content: "Nempo Organizer — Garut & Jawa Barat" },
+      { property: "og:title", content: "Nempo Garut — Organizer & Platform Kreatif Jawa Barat" },
       {
         property: "og:description",
-        content: "Wisata, kuliner, penginapan, dan event Garut.",
+        content:
+          "Acara, wedding, layanan kreatif, dan panduan wisata Garut & Jawa Barat dalam satu platform Nempo.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
