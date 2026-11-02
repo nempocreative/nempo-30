@@ -12,7 +12,7 @@ import {
   Megaphone, ArrowRight, Clock, Zap,
 } from "lucide-react";
 
-const API = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
+const API = "/api";
 
 interface Perlombaan {
   id: number;

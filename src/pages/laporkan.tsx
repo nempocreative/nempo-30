@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-const API = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
+const API = "/api";
 
 const CATEGORIES = [
   { value: "bug",     label: "Bug / Error Teknis",       icon: Bug,          color: "text-red-500     bg-red-50     border-red-100"     },

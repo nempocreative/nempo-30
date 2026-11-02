@@ -4062,7 +4062,7 @@ interface ScanRecord {
 interface CheckinEntry { id: number; order_code: string; buyer_name: string; buyer_phone?: string; qty: number; checked_in_at: string; ticket_name?: string; }
 
 function ScanTab({ onBack }: { onBack: () => void }) {
-  const API = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
+  const API = "/api";
   const [mode, setMode]         = useState<"camera" | "manual">("camera");
   const [scanning, setScanning] = useState(false);
   const [loading, setLoading]   = useState(false);
@@ -4961,7 +4961,7 @@ function genOTSCode() {
 }
 
 function TiketTab() {
-  const API = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
+  const API = "/api";
   const [orders, setOrders] = useState<TicketOrder[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");

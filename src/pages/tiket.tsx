@@ -11,7 +11,7 @@ import {
 import { NEMPO_CONSULT_URL } from "@/lib/contact";
 import html2canvas from "html2canvas";
 
-const API = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
+const API = "/api";
 
 interface EventTicket {
   id: number;

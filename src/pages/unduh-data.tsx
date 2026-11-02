@@ -9,7 +9,7 @@ import {
 import { useState } from "react";
 import { useAuth } from "@/contexts/auth-context";
 
-const API = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
+const API = "/api";
 
 type DownloadStatus = "idle" | "loading" | "done" | "error";
 

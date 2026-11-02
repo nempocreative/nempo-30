@@ -7,7 +7,7 @@ import {
   CheckCircle, Trash2, RefreshCw, AlertCircle, LogOut,
 } from "lucide-react";
 
-const API = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
+const API = "/api";
 
 interface Session {
   id: number;

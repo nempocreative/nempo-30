@@ -283,7 +283,7 @@ const IMPACTS = [
 ];
 
 const TARGET_BIBIT = 50000;
-const API_BASE = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
+const API_BASE = "/api";
 
 interface DonationStats {
   total_bibit: number; total_donors: number;

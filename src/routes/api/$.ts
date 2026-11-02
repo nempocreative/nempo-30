@@ -81,6 +81,18 @@ export const Route = createFileRoute("/api/$")({
 
         if (!cfg) return json({ error: "Not found" }, 404);
 
+        if (name === "events" && idOrSlug && parts.length === 3 && parts[2] === "tickets") {
+          const col = /^\d+$/.test(idOrSlug) ? "id" : "slug";
+          const { data: event, error: eventError } = await sb.from("events")
+            .select("id").eq(col, idOrSlug).maybeSingle();
+          if (eventError) return json({ error: "Gagal memuat data" }, 500);
+          if (!event) return json({ error: "Not found" }, 404);
+          const { data, error } = await sb.from("event_tickets").select("*")
+            .eq("event_id", event.id).eq("active", true).order("sort_order", { ascending: true });
+          if (error) return json({ error: "Gagal memuat data" }, 500);
+          return json((data ?? []).map(toCamel));
+        }
+
         let q: any = sb.from(cfg.table).select("*");
         if (cfg.filter) q = cfg.filter(q);
 

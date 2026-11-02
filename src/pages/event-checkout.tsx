@@ -12,7 +12,7 @@ import {
   CreditCard, Smartphone, Wallet, Info, Tag, Loader2, XCircle,
 } from "lucide-react";
 
-const API = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
+const API = "/api";
 
 interface PaymentInfo {
   bank_name?: string;

@@ -9,7 +9,7 @@ import {
   Clock, CheckCircle, Chrome,
 } from "lucide-react";
 
-const API = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
+const API = "/api";
 
 interface Activity {
   id: number;

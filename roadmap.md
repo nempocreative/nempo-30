@@ -1,4 +1,5 @@
 # Roadmap
+- [x] Pulihkan data MusiComedy Night setelah remix, betulkan alamat API dan daftar tiket; klik beranda → detail, banner, tanggal, Saduli Ragap serta daftar event berhasil diperiksa.
 - [x] Business System: katalog resmi dipasang (7 sistem operasional, 8 sistem manajemen, 10 sistem industri, custom, 3 paket bundling, maintenance, ketentuan, FAQ, CTA WhatsApp); 43 tes lulus, tab, harga, dan tautan WhatsApp diperiksa di HP dan komputer.
 - [x] Halaman talent dirapikan: kartu orang dihapus jadi penjelasan daftar, form line-up diringkas dan tombolnya membuka WhatsApp dengan pesan terisi otomatis; 4 tes lulus, diperiksa di HP dan komputer.
 - [x] Event Liaison Officer Service: 3 tarif per orang, durasi, rincian, harga tambahan, dan catatan pengecualian transportasi/konsumsi/akomodasi di halaman EO; 14 tes lulus, kartu dan daftar tambahan diperiksa di HP dan komputer tanpa potongan.

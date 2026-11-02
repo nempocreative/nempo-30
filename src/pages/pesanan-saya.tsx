@@ -9,7 +9,7 @@ import {
   Loader2, UtensilsCrossed, Bed, Ticket, ArrowRight,
 } from "lucide-react";
 
-const API = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
+const API = "/api";
 
 type OrderStatus = "pending" | "processing" | "completed" | "cancelled";
 type OrderType   = "wisata" | "kuliner" | "penginapan" | "event" | "jajan-yuk";
