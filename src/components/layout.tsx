@@ -375,7 +375,7 @@ export function Layout({ children, hideBottomNav, minimalChrome }: { children: R
   const [mobileSearch, setMobileSearch] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [notifications, setNotifications] = useState<{ id: number; title: string; message: string; type: string; created_at: string }[]>([]);
+  const [notifications, setNotifications] = useState<{ id: number; title: string; message: string; type: string; href: string; created_at: string }[]>([]);
   const [notifOpen, setNotifOpen] = useState(false);
   const [notifRead, setNotifRead] = useState(false);
   const [csOpen, setCsOpen] = useState(false);
@@ -436,12 +436,12 @@ export function Layout({ children, hideBottomNav, minimalChrome }: { children: R
     setNotifRead(true);
   }
 
-  const notifTypeStyle: Record<string, { bg: string; dot: string; border: string; label: string }> = {
-    info:    { bg: "bg-blue-50",   dot: "bg-blue-500",   border: "#3b82f6", label: "Informasi" },
-    update:  { bg: "bg-violet-50", dot: "bg-violet-500", border: "#8b5cf6", label: "Update" },
-    promo:   { bg: "bg-blue-50",  dot: "bg-blue-500",  border: "#0194f3", label: "Promo" },
-    event:   { bg: "bg-teal-50",   dot: "bg-teal-500",   border: "#14b8a6", label: "Event" },
-    warning: { bg: "bg-red-50",    dot: "bg-red-500",    border: "#ef4444", label: "Peringatan" },
+  const notifTypeStyle: Record<string, { bg: string; dot: string; border: string; label: string; text: string }> = {
+    info:    { bg: "bg-blue-50",   dot: "bg-blue-500",   border: "#3b82f6", label: "Informasi", text: "text-blue-600" },
+    update:  { bg: "bg-violet-50", dot: "bg-violet-500", border: "#8b5cf6", label: "Update", text: "text-violet-600" },
+    promo:   { bg: "bg-blue-50",  dot: "bg-blue-500",  border: "#0194f3", label: "Promo", text: "text-[#0194f3]" },
+    event:   { bg: "bg-teal-50",   dot: "bg-teal-500",   border: "#14b8a6", label: "Event", text: "text-teal-600" },
+    warning: { bg: "bg-red-50",    dot: "bg-red-500",    border: "#ef4444", label: "Peringatan", text: "text-red-600" },
   };
 
   useEffect(() => {
@@ -569,7 +569,8 @@ export function Layout({ children, hideBottomNav, minimalChrome }: { children: R
                             {notifications.map(n => {
                               const style = notifTypeStyle[n.type] ?? notifTypeStyle.info;
                               return (
-                                <div key={n.id} className={`px-4 py-3 border-l-4 ${style.bg}`}
+                                <Link key={n.id} href={n.href} onClick={() => setNotifOpen(false)}
+                                  className={`block px-4 py-3 border-l-4 ${style.bg} transition hover:brightness-[0.985]`}
                                   style={{ borderLeftColor: style.border }}>
                                   <div className="flex items-start gap-2">
                                     <span className={`mt-1 h-2 w-2 rounded-full shrink-0 ${style.dot}`} />
@@ -581,16 +582,24 @@ export function Layout({ children, hideBottomNav, minimalChrome }: { children: R
                                         </span>
                                       </div>
                                       <p className="text-gray-600 text-xs leading-relaxed">{n.message}</p>
+                                      <span className={`mt-1.5 inline-flex items-center gap-0.5 text-[10px] font-bold ${style.text}`}>
+                                        {style.label}
+                                        <ChevronRightIcon className="h-3 w-3" />
+                                      </span>
                                     </div>
                                   </div>
-                                </div>
+                                </Link>
                               );
                             })}
                           </div>
                         )}
                       </div>
                       <div className="px-4 py-2 border-t border-gray-100 bg-gray-50">
-                        <p className="text-[10px] text-gray-400 text-center">Notifikasi diperbarui setiap hari</p>
+                        <Link href="/notifikasi" onClick={() => setNotifOpen(false)}
+                          className="flex items-center justify-center gap-0.5 text-[10px] font-bold text-[#0194f3] hover:underline">
+                          Buka halaman notifikasi
+                          <ChevronRightIcon className="h-3 w-3" />
+                        </Link>
                       </div>
                     </div>
                   </>

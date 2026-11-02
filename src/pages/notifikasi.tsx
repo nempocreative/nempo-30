@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
 import { Link } from "@/lib/wouter";
-import { ArrowLeft, Bell, BellOff, Megaphone, Tag, Info, Loader2 } from "lucide-react";
+import { ArrowLeft, Bell, BellOff, Megaphone, Tag, Info, Loader2, RefreshCw, AlertTriangle } from "lucide-react";
 
 const API = import.meta.env.BASE_URL.replace(/\/$/, "") + "/../api";
 
@@ -11,15 +11,17 @@ interface Notif {
   title: string;
   message: string;
   type: string;
+  href: string;
   created_at: string;
 }
 
 const typeIcon: Record<string, typeof Bell> = {
-  promo: Tag, info: Info, event: Megaphone,
+  promo: Tag, info: Info, event: Megaphone, update: RefreshCw, warning: AlertTriangle,
 };
 const typeColor: Record<string, string> = {
   promo: "text-orange-500 bg-orange-50", info: "text-[#0194f3] bg-blue-50",
-  event: "text-violet-500 bg-violet-50",
+  event: "text-teal-600 bg-teal-50", update: "text-violet-600 bg-violet-50",
+  warning: "text-red-500 bg-red-50",
 };
 
 function timeAgo(d: string) {
@@ -50,7 +52,7 @@ export default function NotifikasiPage() {
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
         <div className="sticky top-0 z-10 bg-white border-b border-gray-100 px-4 py-3 flex items-center gap-3">
-          <Link href="/profil">
+          <Link href="/">
             <button className="p-2 -ml-2 rounded-xl hover:bg-gray-100 transition-colors">
               <ArrowLeft className="h-5 w-5 text-gray-700" />
             </button>
@@ -73,7 +75,7 @@ export default function NotifikasiPage() {
                 <BellOff className="h-8 w-8 text-blue-300" />
               </div>
               <h3 className="font-bold text-gray-800 mb-1">Belum ada notifikasi</h3>
-              <p className="text-sm text-gray-400">Kamu akan mendapat pemberitahuan seputar promo, event, dan info terbaru Garut di sini.</p>
+              <p className="text-sm text-gray-400">Kamu akan mendapat pemberitahuan seputar layanan Nempo, jadwal event, promo, dan open recruitment di sini.</p>
             </div>
           ) : (
             <div className="space-y-2">
@@ -81,7 +83,7 @@ export default function NotifikasiPage() {
                 const Ic = typeIcon[n.type] ?? Bell;
                 const cls = typeColor[n.type] ?? "text-gray-500 bg-gray-50";
                 return (
-                  <div key={n.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex gap-3">
+                  <Link key={n.id} href={n.href} className="block bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex gap-3 transition hover:border-[#0194f3]/40 hover:shadow-md">
                     <div className={`h-10 w-10 rounded-xl flex items-center justify-center shrink-0 ${cls}`}>
                       <Ic className="h-5 w-5" />
                     </div>
@@ -90,7 +92,7 @@ export default function NotifikasiPage() {
                       <p className="text-gray-500 text-xs mt-0.5 leading-relaxed">{n.message}</p>
                       <p className="text-gray-300 text-[10px] mt-1.5">{timeAgo(n.created_at)}</p>
                     </div>
-                  </div>
+                  </Link>
                 );
               })}
             </div>
