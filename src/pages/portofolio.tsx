@@ -28,7 +28,7 @@ export default function PortofolioPage() {
         path="/portofolio"
       />
 
-      <main className="min-h-screen overflow-hidden bg-white text-[#17233a]">
+      <main className="min-h-screen overflow-x-clip bg-white text-[#17233a]">
         {/* ===== HEADER ===== */}
         <section className="relative overflow-hidden text-white" style={{ background: "linear-gradient(145deg, #0172B1 0%, #0194f3 55%, #1BA0E2 100%)" }}>
           <div className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-sky-400/10 blur-3xl" />
@@ -44,11 +44,38 @@ export default function PortofolioPage() {
               Dari panggung event, konten sosmed, sampai undangan digital —
               lihat hasil kerja kami sebelum mulai bareng Nempo.
             </p>
+            <div className="mt-8 grid max-w-xl grid-cols-3 gap-3">
+              {[
+                { n: eventPortfolioItems.length, l: "Event" },
+                { n: invitationThemes.length, l: "Tema undangan" },
+                { n: serviceLinks.length, l: "Layanan" },
+              ].map((s) => (
+                <div key={s.l} className="rounded-2xl border border-white/20 bg-white/10 px-4 py-3 backdrop-blur">
+                  <p className="text-2xl font-black sm:text-3xl">{s.n}+</p>
+                  <p className="text-[11px] font-bold uppercase tracking-wide text-white/70">{s.l}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
+        {/* ===== JUMP NAV ===== */}
+        <nav className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
+          <div className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-4 py-3 sm:px-6 lg:px-8">
+            {[
+              { id: "event", l: "Event" },
+              { id: "sosmed", l: "Sosmed" },
+              { id: "undangan", l: "Undangan Digital" },
+            ].map((t) => (
+              <a key={t.id} href={`#${t.id}`} className="shrink-0 rounded-full border border-slate-200 bg-slate-50 px-4 py-1.5 text-xs font-bold text-slate-600 transition hover:border-[#0194f3] hover:text-[#0194f3]">
+                {t.l}
+              </a>
+            ))}
+          </div>
+        </nav>
+
         {/* ===== EVENT ===== */}
-        <section className="bg-white">
+        <section id="event" className="scroll-mt-16 bg-white">
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
             <div className="max-w-xl">
               <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#0194f3]">
@@ -100,7 +127,7 @@ export default function PortofolioPage() {
         </section>
 
         {/* ===== SOSMED ===== */}
-        <section className="bg-slate-50">
+        <section id="sosmed" className="scroll-mt-16 bg-slate-50">
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
             <div className="max-w-xl">
               <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#0194f3]">
@@ -120,7 +147,7 @@ export default function PortofolioPage() {
         </section>
 
         {/* ===== WEDDING INVITATION ===== */}
-        <section className="bg-white">
+        <section id="undangan" className="scroll-mt-16 bg-white">
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
             <div className="max-w-xl">
               <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#0194f3]">

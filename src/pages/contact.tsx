@@ -7,7 +7,7 @@ import {
   NEMPO_INSTAGRAM_URL,
   NEMPO_INSTAGRAM_DM_URL,
 } from "@/lib/contact";
-import { ArrowUpRight, Instagram, MessageCircle, Music2 } from "lucide-react";
+import { ArrowUpRight, Clock, Instagram, MapPin, MessageCircle, Music2 } from "lucide-react";
 
 const channels = [
   {
@@ -62,6 +62,10 @@ export default function ContactPage() {
               Ceritakan kebutuhanmu — acara, konten, undangan, atau website.
               Semua percakapan dimulai dari satu pesan singkat.
             </p>
+            <div className="mt-6 flex flex-wrap gap-2 text-xs font-bold">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5"><Clock className="h-3.5 w-3.5" /> Respons cepat di jam kerja</span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5"><MapPin className="h-3.5 w-3.5" /> Garut · Jawa Barat</span>
+            </div>
           </div>
         </section>
 
@@ -100,6 +104,23 @@ export default function ContactPage() {
                   </a>
                 );
               })}
+            </div>
+
+            <div className="mt-10">
+              <h2 className="text-center text-lg font-black tracking-[-0.03em] text-slate-800 sm:text-xl">Cara mulai bareng Nempo</h2>
+              <ol className="mt-5 grid gap-3 sm:grid-cols-3">
+                {[
+                  { t: "Kirim pesan", d: "Sapa kami di WhatsApp, sebutkan layanan yang kamu butuhkan." },
+                  { t: "Konsultasi konsep", d: "Kami bantu susun ide, kebutuhan, dan estimasi biaya." },
+                  { t: "Eksekusi", d: "Setelah sepakat, tim Nempo langsung jalan sampai selesai." },
+                ].map((step, i) => (
+                  <li key={step.t} className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0194f3]/10 text-sm font-black text-[#0194f3]">{i + 1}</span>
+                    <p className="mt-3 text-sm font-extrabold text-slate-800">{step.t}</p>
+                    <p className="mt-1 text-xs leading-5 text-slate-500">{step.d}</p>
+                  </li>
+                ))}
+              </ol>
             </div>
 
             <div className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 text-center shadow-sm sm:p-8">
