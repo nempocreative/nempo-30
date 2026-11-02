@@ -73,12 +73,9 @@ export default function PortofolioPage() {
             ))}
           </div>
         </nav>
-        <section className="hidden">
-          <div>
-        </section>
 
         {/* ===== EVENT ===== */}
-        <section className="bg-white">
+        <section id="event" className="scroll-mt-16 bg-white">
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
             <div className="max-w-xl">
               <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#0194f3]">
@@ -130,7 +127,7 @@ export default function PortofolioPage() {
         </section>
 
         {/* ===== SOSMED ===== */}
-        <section className="bg-slate-50">
+        <section id="sosmed" className="scroll-mt-16 bg-slate-50">
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
             <div className="max-w-xl">
               <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#0194f3]">
@@ -150,7 +147,7 @@ export default function PortofolioPage() {
         </section>
 
         {/* ===== WEDDING INVITATION ===== */}
-        <section className="bg-white">
+        <section id="undangan" className="scroll-mt-16 bg-white">
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
             <div className="max-w-xl">
               <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#0194f3]">
